@@ -65,10 +65,10 @@ class ArticleController extends AbstractController
     /**
      * Supprimer un article
      */
-    public function remove(int $id): Response
+    public function remove(int $id, PersistenceManagerRegistry $doctrine): Response
     {
         // Entity Manager de Symfony
-        $em = $this->getDoctrine()->getManager();
+        $em = $doctrine->getManager();
         // On récupère l'article qui correspond à l'id passé dans l'url
         $article = $em->getRepository(Article::class)->findBy(['id' => $id]) [0];
 
