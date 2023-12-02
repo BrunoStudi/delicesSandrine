@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Article;
+use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
 
 class ArticleController extends AbstractController
 {
@@ -16,10 +19,10 @@ class ArticleController extends AbstractController
      * 
      * @return Response
      */
-    public function index(int $id): Response
+    public function index(PersistenceManagerRegistry $doctrine, int $id): Response
     {
         // Entity Manager de Symfony
-        $em = $this->getDoctrine()->getManager();
+        $em = $doctrine->getManager();
         // On récupère l'article qui correspond à l'id passé dans l'url
         $article = $em->getRepository(Article::class)->findBy(['id' => $id]);
 
@@ -31,9 +34,9 @@ class ArticleController extends AbstractController
     /**
      * Modifier / ajouter un article
      */
-    public function edit(Request $request, int $id=null): Response
+    public function edit(Request $request, PersistenceManagerRegistry $doctrine, int $id=null): Response
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $doctrine->getManager();
 
         if($id) {
             $mode = 'update';
@@ -89,7 +92,7 @@ class ArticleController extends AbstractController
      */
     private function completeArticleBeforeSave(Article $article, string $mode) {
         if($article->getPublished()){
-            $article-getPublisedAt(new \DateTime());
+            $article->getPublisedAt(new \DateTime());
         }
         $article->setAuthor($this->getUser());
 
@@ -102,10 +105,10 @@ class ArticleController extends AbstractController
      * @param   Article     $article
      * @param   string      $mode
      */
-    private function saveArticle(Article $article, string $mode){
+    private function saveArticle(Article $article, PersistenceManagerRegistry $doctrine, string $mode){
         $article = $this->completeArticleBeforeSave($article, $mode);
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $doctrine->getManager();
         $em->persist($article);
         $em->flush();
     }
