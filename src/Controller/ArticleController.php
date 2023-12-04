@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\ArticleType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,7 +35,7 @@ class ArticleController extends AbstractController
     /**
      * Modifier / ajouter un article
      */
-    public function edit(Request $request, PersistenceManagerRegistry $doctrine, int $id=null): Response
+    public function edit(PersistenceManagerRegistry $doctrine, Request $request, int $id=null): Response
     {
         $em = $doctrine->getManager();
 
@@ -49,11 +50,13 @@ class ArticleController extends AbstractController
 
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
+        
 
         if($form->isSubmitted() && $form->isValid()) {
-            $this->saveArticle($article, $mode);
+            $this->saveArticle($doctrine, $article, $mode);
 
-            return $this->redirectToRoute('article_edit', array('id' => $article->getId()));
+            //return $this->redirectToRoute('article_edit', array('id' => $article->getId()));
+            return $this->redirectToRoute('homepage');
         }
 
         $parameters = array(
@@ -91,7 +94,7 @@ class ArticleController extends AbstractController
      * @return Article
      */
     private function completeArticleBeforeSave(Article $article, string $mode) {
-        if($article->getPublished()){
+        if($article->getPublishedAt()){
             $article->getPublisedAt(new \DateTime());
         }
         $article->setAuthor($this->getUser());
@@ -105,7 +108,8 @@ class ArticleController extends AbstractController
      * @param   Article     $article
      * @param   string      $mode
      */
-    private function saveArticle(Article $article, PersistenceManagerRegistry $doctrine, string $mode){
+    private function saveArticle(PersistenceManagerRegistry $doctrine, Article $article, string $mode): void
+    {
         $article = $this->completeArticleBeforeSave($article, $mode);
 
         $em = $doctrine->getManager();
