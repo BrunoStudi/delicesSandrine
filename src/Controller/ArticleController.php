@@ -41,7 +41,7 @@ class ArticleController extends AbstractController
 
         if($id) {
             $mode = 'update';
-            $article = $em->getRepository(Article::class)->findBy(['id' => $id]);
+            $article = $em->getRepository(Article::class)->findOneBy(['id' => $id]);
         }
         else {
             $mode = 'new';
@@ -50,9 +50,10 @@ class ArticleController extends AbstractController
 
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
-        
+
 
         if($form->isSubmitted() && $form->isValid()) {
+            
             $this->saveArticle($doctrine, $article, $mode);
 
             //return $this->redirectToRoute('article_edit', array('id' => $article->getId()));
@@ -98,7 +99,7 @@ class ArticleController extends AbstractController
             $article->getPublisedAt(new \DateTime());
         }
         $article->setAuthor($this->getUser());
-
+        
         return $article;
     }
 
