@@ -5,17 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" 
-href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     {% block stylesheets %}
     {% endblock %}
-    <title>Symfony Blog - {% block title %}{% endblock %}</title>
+    <title>Les Délices de Sandrine - {% block title %}{% endblock %}</title>
 </head>
 
 <body>
+    
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ path('homepage') }}">Symfony-Blog</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobileMenu" aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+    <img src={{asset('media/logo.jpg')}} alt="image plats légumes" class="rounded mr-2" width = "10%">
+        <a class="navbar-brand text-success text-uppercase" href="{{ path('homepage') }}">Les Délices de Sandrine</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobileMenu" 
+        aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="mobileMenu">
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
