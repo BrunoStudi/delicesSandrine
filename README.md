@@ -1,3 +1,3 @@
-﻿# symfony-blog
+﻿# Les delices de Sandrine
 
-un petit projet symfony pour ma formation fullstack.
+a full website with users and admin user conexion about woman's food for my training
