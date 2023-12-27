@@ -12,15 +12,16 @@
             </div>
         </div>
 
+        {% if is_granted('ROLE_ADMIN')%}
         <div class="row alert alert-warning" role="alert">
             <div class="col-xs-9 col-sm-10"></div>
-
             <div class="col-xs-3 col-sm-2">
                 <a href="{{ path('article_add') }}" role="button" class="btn btn-info text-right">
                     <i class="fa fa-plus fa-fw"></i> Ajouter une recette
                 </a>
             </div>
         </div>
+        {% endif %}
     </div>
 
     <div class="container-fluid">
@@ -55,10 +56,14 @@
                         {{ article.author.username }}
                     </td>
                     <td>
+                        {% if is_granted('ROLE_ADMIN')%}
                         <a href="{{ path('article_remove', {'id': article.id}) }}" role="button" class="btn btn-danger">Supprimer</a>
+                        {% endif %}
                     </td>
                     <td>
+                        {% if is_granted('ROLE_ADMIN')%}
                         <a href="{{ path('article_edit', {'id': article.id}) }}" role="button" class="btn btn-info">Modifier</a>
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}
