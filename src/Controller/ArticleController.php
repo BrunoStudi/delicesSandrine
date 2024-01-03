@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Article;
 use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ArticleController extends AbstractController
 {
@@ -35,12 +36,12 @@ class ArticleController extends AbstractController
     /**
      * Modifier / ajouter un article
      */
-    public function edit(PersistenceManagerRegistry $doctrine, Request $request, int $id=null): Response
+    public function edit(PersistenceManagerRegistry $doctrine, Request $request, SluggerInterface $slugger, int $id=null): Response
     {
         $em = $doctrine->getManager();
 
         if($id) {
-            $mode = 'update';
+            $mode = 'update';   //variable qui sert à detecter si on créer ou modifie un article
             $article = $em->getRepository(Article::class)->findOneBy(['id' => $id]);
         }
         else {
@@ -55,6 +56,31 @@ class ArticleController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             
             $this->saveArticle($doctrine, $article, $mode);
+            // uploader une image.
+            $imageFile = $form->get('imagePlat')->getData();
+            // cette condition est necessaire car imageFile n'est pas un champ obligatoire,
+            // donc la condition s'applique uniquement si un fichier est chargé.
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // ceci est necessaire pour inclure le nom du fichier dans l'URL de façon sécurisé.
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+                // Déplacer le ficheir dans le repertoire approprié.
+                try {
+                    $imageFile->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... message d'erreur personalisé pour un echec d'upload.
+                }
+                // mise à jour des propriétées de 'imageFile' pour enregistrer le nom de l'image.
+                $article->setImage($newFilename);
+                // enregistrement du chemin en base de données (pas le fichier lui-même).
+                $em = $doctrine->getManager();
+                $em->persist($article);
+                $em->flush();
+            }
 
             //return $this->redirectToRoute('article_edit', array('id' => $article->getId()));
             return $this->redirectToRoute('homepage');

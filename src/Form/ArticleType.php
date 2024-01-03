@@ -8,12 +8,14 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\File;
 
 class ArticleType extends AbstractType
 {
@@ -21,7 +23,7 @@ class ArticleType extends AbstractType
     {
         // Titre
         $builder->add('title', TextType::class, [
-            'label' => 'Titre*',
+            'label' => 'Titre:',
             'constraints' => [
                 new NotBlank([
                     'message' => 'Ce champ ne peut être vide'
@@ -29,9 +31,32 @@ class ArticleType extends AbstractType
             ]
         ]);
 
+        //imageUpload
+        $builder->add('imagePlat', FileType::class, [
+                'label' => 'image du plat (jpg, jpeg, png uniquement)',
+                // unmapped means that this field is not associated to any entity property
+                'mapped' => false,
+                // make it optional so you don't have to re-upload the PDF file
+                // every time you edit the Product details
+                'required' => false,
+                // unmapped fields can't define their validation using attributes
+                // in the associated entity, so you can use the PHP constraint classes
+                'constraints' => [
+                    new File([
+                        'maxSize' => '2048k',
+                        'mimeTypes' => [
+                            'image/jpg',
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Téléversez une image valide',
+                    ])
+                ],
+        ]);
+
         // Contenu
         $builder->add('content', TextareaType::class, [
-            'label' => 'Corps de l\'article'
+            'label' => 'Corps de l\'article:'
         ]);
 
         // Statut

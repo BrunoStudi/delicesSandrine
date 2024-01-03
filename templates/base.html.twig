@@ -12,7 +12,6 @@
 </head>
 
 <body>
-    
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #556B2F;">
     <img src={{asset('media/logo.jpg')}} alt="image plats légumes" class="rounded mr-2" width = "10%">
         <a class="navbar-brand text-uppercase" href="{{ path('homepage') }}">Les Délices de Sandrine</a>
@@ -24,7 +23,7 @@
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                 {% if app.user %}
                 <li class="nav-item">
-                    <span class="nav-link">Bienvenue {{ app.user.username }} !</span>
+                    <span class="nav-link">Bienvenue {{ app.user.username }} ! - Status: {{app.user.roles[0]}}</span>
                 </li>
                 {% endif %}
                 <li class="nav-item {{ app.request.get('_route') == 'homepage' ? 'active' : '' }}">
