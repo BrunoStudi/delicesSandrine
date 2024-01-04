@@ -135,7 +135,7 @@ class ArticleController extends AbstractController
      * @param   Article     $article
      * @param   string      $mode
      */
-    private function saveArticle(PersistenceManagerRegistry $doctrine, Article $article, string $mode): void
+    private function saveArticle(PersistenceManagerRegistry $doctrine, Article $article, string $mode)
     {
         $article = $this->completeArticleBeforeSave($article, $mode);
 

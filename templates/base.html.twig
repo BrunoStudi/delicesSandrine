@@ -23,12 +23,17 @@
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                 {% if app.user %}
                 <li class="nav-item">
-                    <span class="nav-link">Bienvenue {{ app.user.username }} ! - Status: {{app.user.roles[0]}}</span>
+                    <span class="nav-link">Bienvenue {{ app.user.username }} ! - Grade: {{app.user.roles[0]}}</span>
                 </li>
                 {% endif %}
                 <li class="nav-item {{ app.request.get('_route') == 'homepage' ? 'active' : '' }}">
                     <a class="nav-link" href="{{ path('homepage') }}">Accueil</a>
                 </li>
+                {% if is_granted('ROLE_ADMIN')%}
+                    <li class="nav-item {{ app.request.get('_route') == 'gusers' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ path('app_gusers') }}">Gérer utilisateurs</a>
+                    </li>
+                {% endif %}
                 {% if app.user %}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
