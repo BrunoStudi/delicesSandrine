@@ -27,4 +27,21 @@ class UsersController extends AbstractController
         ]);
     }
 
+    /**
+     * Supprimer un utilisateur
+     */
+    public function removeUser(int $id, PersistenceManagerRegistry $doctrine): Response
+    {
+        // Entity Manager de Symfony
+        $em = $doctrine->getManager();
+        // On récupère l'autilisateur qui correspond à l'id passé dans l'url
+        $gUsers = $em->getRepository(User::class)->findBy(['id' => $id]) [0];
+
+        // L'utilisateur est supprimé
+        $em->remove($gUsers);
+        $em->flush();
+
+        return $this->redirectToRoute('app_gusers');
+    }
+
 }

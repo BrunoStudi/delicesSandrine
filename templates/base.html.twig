@@ -29,6 +29,9 @@
                 <li class="nav-item {{ app.request.get('_route') == 'homepage' ? 'active' : '' }}">
                     <a class="nav-link" href="{{ path('homepage') }}">Accueil</a>
                 </li>
+                <li class="nav-item {{ app.request.get('_route') == 'recettes' ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ path('article_show') }}">Nos Recettes</a>
+                </li>
                 {% if is_granted('ROLE_ADMIN')%}
                     <li class="nav-item {{ app.request.get('_route') == 'gusers' ? 'active' : '' }}">
                         <a class="nav-link" href="{{ path('app_gusers') }}">Gérer utilisateurs</a>

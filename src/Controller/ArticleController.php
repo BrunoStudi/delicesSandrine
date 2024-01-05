@@ -15,22 +15,19 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class ArticleController extends AbstractController
 {
     /**
-     * Visualiser un article
-     * 
-     * @param   int     $id     Identifiant de l'article
+     * Page d'acceuil
      * 
      * @return Response
      */
-    public function index(PersistenceManagerRegistry $doctrine, int $id): Response
+    public function index(PersistenceManagerRegistry $doctrine): Response
     {
-        // Entity Manager de Symfony
-        $em = $doctrine->getManager();
-        // On récupère l'article qui correspond à l'id passé dans l'url
-        $article = $em->getRepository(Article::class)->findBy(['id' => $id]);
-
-        return $this->render('article/index.html.twig', [
-            'article' => $article,
-        ]);
+       //Entity Manager de Symfony
+       $em = $doctrine->getManager();
+       //Tout les articles en base de données
+       $articles = $em->getRepository(Article::class)->findAll();
+       return $this->render('article/index.html.twig', [
+           'articles' => $articles,
+       ]);
     }
 
     /**
@@ -83,7 +80,7 @@ class ArticleController extends AbstractController
             }
 
             //return $this->redirectToRoute('article_edit', array('id' => $article->getId()));
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('article_show');
         }
 
         $parameters = array(
@@ -109,7 +106,7 @@ class ArticleController extends AbstractController
         $em->remove($article);
         $em->flush();
 
-        return $this->redirectToRoute('homepage');
+        return $this->redirectToRoute('article_show');
     }
 
     /**

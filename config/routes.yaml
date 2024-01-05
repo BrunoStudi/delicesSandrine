@@ -5,14 +5,12 @@ controllers:
     type: attribute
 
 homepage:
-    path: /
+    path: /homepage
     controller: App\Controller\HomeController::index
 
 article_show:
-    path: /{id}
+    path: /recettes
     controller: App\Controller\ArticleController::index
-    requirements:
-        id: '\d+'
 
 article_add:
     path: /add
@@ -27,6 +25,12 @@ article_edit:
 article_remove:
     path: /remove/{id}
     controller: App\Controller\ArticleController::remove
+    requirements:
+        id: '\d+'
+
+user_removeUser:
+    path: /removeUser/{id}
+    controller: App\Controller\UsersController::removeUser
     requirements:
         id: '\d+'
         
