@@ -35,6 +35,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Article::class, orphanRemoval: true)]
     private Collection $articles;
 
+    #[ORM\Column(length: 30)]
+    private ?string $diet = null;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -53,6 +56,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUsername(string $username): static
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    public function getDiet(): ?string
+    {
+        return $this->diet;
+    }
+
+    public function setDiet(string $diet): static
+    {
+        $this->diet = $diet;
 
         return $this;
     }

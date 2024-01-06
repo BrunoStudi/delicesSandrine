@@ -14,6 +14,10 @@
                 {{ form_widget(registrationForm.plainPassword, {'attr': {'placeholder': 'Mot de passe'}}) }}
                 <span class="error">{{ form_errors(registrationForm.plainPassword) }}</span>
             </div>
+            <div class="input-field col text-center mt-2">
+                {{ form_widget(registrationForm.diet) }}
+                <span class="error">{{ form_errors(registrationForm.diet) }}</span>
+            </div>
             <div class="input-field col s12 text-center mt-5">
                 <input type="submit" name="" class="btn btn-primary" value="Ajouter">
             </div>
