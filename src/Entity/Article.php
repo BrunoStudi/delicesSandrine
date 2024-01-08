@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
+#[ORM\Table(name: '`article`')]
 class Article
 {
     #[ORM\Id]
@@ -32,6 +33,9 @@ class Article
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
+
+    #[ORM\Column(length: 60)]
+    private ?string $Rgm = null;
 
     public function getId(): ?int
     {
@@ -106,6 +110,18 @@ class Article
     public function setImage(?string $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getRgm(): ?string
+    {
+        return $this->Rgm;
+    }
+
+    public function setRgm(string $Rgm): static
+    {
+        $this->Rgm = $Rgm;
 
         return $this;
     }

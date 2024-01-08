@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Article;
+use App\Entity\Diet;
 use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -57,6 +58,19 @@ class ArticleType extends AbstractType
         // Contenu
         $builder->add('content', TextareaType::class, [
             'label' => 'Corps de l\'article:'
+        ]);
+
+        //Régime du plat
+        $builder->add('Rgm', EntityType::class, [
+            'mapped' => false,
+            'class' => Diet::class,
+            'choice_label' => 'dietName',
+            'label' => 'Régime:',
+            'placeholder' => 'Choisissez le régime du plat',
+            'choice_value' => function (Diet $entity = null)
+            {
+                return $entity ? $entity->getDietName(): '';
+            }
         ]);
 
         // Statut

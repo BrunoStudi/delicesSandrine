@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\ArticleType;
+use App\Entity\Diet;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -119,9 +120,11 @@ class ArticleController extends AbstractController
      */
     private function completeArticleBeforeSave(Article $article, string $mode) {
         if($article->getPublishedAt()){
-            $article->getPublisedAt(new \DateTime());
+            $article->getPublishedAt(new \DateTime());
         }
         $article->setAuthor($this->getUser());
+        $article->setPublishedAt(new \DateTime());
+        //$article->setRgm(???);
         
         return $article;
     }
