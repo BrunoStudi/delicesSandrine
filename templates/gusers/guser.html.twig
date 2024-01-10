@@ -23,11 +23,11 @@
                 <div class="card-body">
                     {% for User in Utilisateurs %}
                         <div class="mx-auto">
-                            <p class="my-3 mx-3">{{ User.roles [0] }}
-                                <span class="ml-5">{{ User.username }}
-                                <span class="ml-5">{{ User.diet }}
-                                <span class="float-right"><a href="{{ path('user_removeUser', {'id': User.id}) }}" role="button" class="btn btn-danger">Supprimer</a>
-                                </span>
+                            <p class="my-4 mx-3">{{ User.roles [0] }}
+                                <span class="ml-5">{{ User.username }}</span>
+                                <span class="ml-5">{{ User.diet }}</span>
+                                <span class="float-right"><a href="{{ path('user_removeUser', {'id': User.id}) }}" 
+                                 role="button" class="btn btn-danger">Supprimer</a></span>
                             </p>
                         </div> 
                     {% endfor %}

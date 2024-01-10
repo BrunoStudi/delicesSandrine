@@ -22,26 +22,28 @@
     </div>
     <div class="container-fluid">
         {% for article in articles %}
-        <div class="mx-auto mt-5">
-        <h3 class="text-center h5 py-3 pl-3 rounded border-bottom border-success bg-success">{{ article.title }}</h3>
-            <div class="text-center rounded border border-success" style="background-image: url(./media/back.png); overflow-y: auto">
-                <img class="mx-2 mt-2 mb-4 rounded img-fluid" style="width: 360px" 
-                 alt="img" src="./uploads/images/{{ article.image }}">
-                <p class="px-3 h6">{{ article.content|nl2br }}</p></br>
-            </div>
-            <div class="mt-5 text-center border-bottom border-success-light">
-                <ul class="list-unstyled">
-                    <li class="mt-2 mt-3">
-                        {% if is_granted('ROLE_ADMIN')%}
-                            <a href="{{ path('article_edit', {'id': article.id}) }}" role="button" class="btn btn-info">Modifier</a>
-                            <a href="{{ path('article_remove', {'id': article.id}) }}" role="button" class="btn btn-danger">Supprimer</a>
-                        {% endif %}
-                        <li class="mt-4">Auteur: {{ article.author.username }}</li>
-                        <li class="mt-2">Publié le: {{ article.publishedAt | date("d-m-Y à H:i:s") }}</li>
-                    </li>
-                </ul>
-            </div>
-        </div>
+            {% if (app.user.diet == article.dietFood) or is_granted('ROLE_ADMIN') %}
+                <div class="mx-auto mt-5">
+                    <h3 class="text-center h5 py-3 pl-3 rounded border-bottom border-success bg-success">{{ article.title }}</h3>
+                    <div class="text-center rounded border border-success" style="background-image: url(./media/back.png); overflow-y: auto">
+                        <img class="mx-2 mt-2 mb-4 rounded img-fluid" style="width: 360px" 
+                        alt="img" src="./uploads/images/{{ article.image }}">
+                        <p class="px-3 h6">{{ article.content|nl2br }}</p></br>
+                    </div>
+                    <div class="mt-5 text-center border-bottom border-success-light">
+                        <ul class="list-unstyled">
+                            <li class="mt-2 mt-3">
+                                {% if is_granted('ROLE_ADMIN')%}
+                                    <a href="{{ path('article_edit', {'id': article.id}) }}" role="button" class="btn btn-info">Modifier</a>
+                                    <a href="{{ path('article_remove', {'id': article.id}) }}" role="button" class="btn btn-danger">Supprimer</a>
+                                {% endif %}
+                                <li class="mt-4">Auteur: {{ article.author.username }}</li>
+                                <li class="mt-2">Publié le: {{ article.publishedAt | date("d-m-Y à H:i:s") }}</li>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
         {% endfor %}
     </div>
 {% endblock %}
