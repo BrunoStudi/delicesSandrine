@@ -17,14 +17,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ArticleType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options) : void
     {
         // Titre
         $builder->add('title', TextType::class, [
-            'label' => 'Titre:',
+            'label' => 'Nom de la recette:',
             'constraints' => [
                 new NotBlank([
                     'message' => 'Ce champ ne peut être vide'
@@ -34,12 +35,12 @@ class ArticleType extends AbstractType
 
         //imageUpload
         $builder->add('imagePlat', FileType::class, [
-                'label' => 'image du plat (jpg, jpeg, png uniquement)',
+                'label' => 'image du plat (jpg, jpeg, png uniquement):',
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
                 // make it optional so you don't have to re-upload the PDF file
                 // every time you edit the Product details
-                'required' => false,
+                'required' => true,
                 // unmapped fields can't define their validation using attributes
                 // in the associated entity, so you can use the PHP constraint classes
                 'constraints' => [
@@ -57,19 +58,16 @@ class ArticleType extends AbstractType
 
         // Contenu
         $builder->add('content', TextareaType::class, [
-            'label' => 'Corps de l\'article:'
+            'label' => 'Contenu du plat:'
         ]);
 
-        //Régime du plat
-        $builder->add('Rgm', EntityType::class, [
-            'mapped' => false,
+        $builder->add('dietFood', EntityType::class, [
             'class' => Diet::class,
             'choice_label' => 'dietName',
-            'label' => 'Régime:',
-            'placeholder' => 'Choisissez le régime du plat',
-            'choice_value' => function (Diet $entity = null)
+            'label' => 'Régime du plat:',
+            'choice_value' => function ($entity)
             {
-                return $entity ? $entity->getDietName(): '';
+                return $entity;
             }
         ]);
 

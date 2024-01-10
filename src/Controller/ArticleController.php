@@ -74,6 +74,7 @@ class ArticleController extends AbstractController
                 }
                 // mise à jour des propriétées de 'imageFile' pour enregistrer le nom de l'image.
                 $article->setImage($newFilename);
+
                 // enregistrement du chemin en base de données (pas le fichier lui-même).
                 $em = $doctrine->getManager();
                 $em->persist($article);
@@ -124,8 +125,7 @@ class ArticleController extends AbstractController
         }
         $article->setAuthor($this->getUser());
         $article->setPublishedAt(new \DateTime());
-        //$article->setRgm(???);
-        
+    
         return $article;
     }
 

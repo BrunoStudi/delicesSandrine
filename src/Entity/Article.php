@@ -34,8 +34,8 @@ class Article
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
-    #[ORM\Column(length: 60)]
-    private ?string $Rgm = null;
+    #[ORM\Column(length: 255)]
+    private ?string $dietFood = null;
 
     public function getId(): ?int
     {
@@ -114,15 +114,16 @@ class Article
         return $this;
     }
 
-    public function getRgm(): ?string
+    public function getDietFood(): ?string
     {
-        return $this->Rgm;
+        return $this->dietFood;
     }
 
-    public function setRgm(string $Rgm): static
+    public function setDietFood(string $dietFood): static
     {
-        $this->Rgm = $Rgm;
+        $this->dietFood = $dietFood;
 
         return $this;
     }
+
 }

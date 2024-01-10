@@ -39,10 +39,12 @@
             {{ include('helpers/form/_group.html.twig', {
                         'field': form['imagePlat']
                     }) }}</br>
-                    
-            {{ include('helpers/form/_group.html.twig', {
-                        'field': form['Rgm']
-                    }) }}</br>
+
+            {% if mode == 'update' %} 
+                {{ include('helpers/form/_group.html.twig', {
+                            'field': form['dietFood']
+                        }) }}</br>
+            {% endif %}
                     
         </div>
 
