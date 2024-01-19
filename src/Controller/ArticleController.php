@@ -2,14 +2,14 @@
 
 namespace App\Controller;
 
-use App\Form\ArticleType;
+use App\Entity\Article;
 use App\Entity\Diet;
+use App\Form\ArticleType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use App\Entity\Article;
 use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
 use Symfony\Component\String\Slugger\SluggerInterface;
 

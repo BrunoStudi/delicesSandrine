@@ -33,4 +33,8 @@ user_removeUser:
     controller: App\Controller\UsersController::removeUser
     requirements:
         id: '\d+'
+
+contact:
+    path: /contact
+    controller: App\Controller\HomeController::contact
         

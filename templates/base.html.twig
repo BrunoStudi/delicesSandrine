@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -13,7 +14,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #556B2F;">
-    <img src={{asset('media/logo.jpg')}} alt="image plats légumes" class="rounded mr-2" width = "15%">
+    <img src={{asset('media/logo.jpg')}} alt="image plats légumes" class="rounded mr-2" width = "10%">
         <a class="navbar-brand text-uppercase" href="{{ path('homepage') }}" style="font-size: 50px">Sandrine Coupart</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobileMenu" 
         aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,9 +30,11 @@
                 <li class="nav-item {{ app.request.get('_route') == 'homepage' ? 'active' : '' }}">
                     <a class="nav-link" href="{{ path('homepage') }}">Accueil</a>
                 </li>
+               
                 <li class="nav-item {{ app.request.get('_route') == 'article_show' ? 'active' : '' }}">
                     <a class="nav-link" href="{{ path('article_show') }}">Mes Recettes</a>
                 </li>
+               
                 {% if is_granted('ROLE_ADMIN')%}
                     <li class="nav-item {{ app.request.get('_route') == 'app_gusers' ? 'active' : '' }}">
                         <a class="nav-link" href="{{ path('app_gusers') }}">Gestion des utilisateurs</a>

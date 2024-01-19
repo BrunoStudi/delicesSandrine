@@ -36,6 +36,7 @@ class Article
 
     #[ORM\Column(length: 255)]
     private ?string $dietFood = null;
+    
 
     public function getId(): ?int
     {
@@ -123,6 +124,21 @@ class Article
     {
         $this->dietFood = $dietFood;
 
+        return $this;
+    }
+
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function setComment(Comment $comment): self
+    {
+        if(!$this->comments->contains($comment))
+        {
+            $this->comments[] = $comment;
+            $comment->setPost($this);
+        }
         return $this;
     }
 

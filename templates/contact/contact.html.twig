@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <h1 class="text-center mt-5 pb-2 border-bottom border-success">Formulaire de contact</h1>
+        <form class="text-center mt-5" method="post">
+            <input class="rounded mb-2" type="text" placeholder="Entrez votre nom" id="name" autocomplete="off"></br>
+            <input class="rounded mb-2" type="email" placeholder="Entrez votre adresse mail" id="email" autocomplete="off"></br>
+            <input class="rounded mb-5" type="text" placeholder="Sujet du message" id="subject" autocomplete="off"></br>
+            <textarea class="rounded" id="message" placeholder="Rédigez votre message ici" cols="50" rows="10"></textarea></br>
+            <button class="rounded mt-3 badge badge-success" style="font-size: 20px" id="btn.envoi">Envoyer</button> 
+        </form>
+    </div>
+   
+    <script>
+        let btn = document.getElementById('btn.envoi');
+        
+        btn.addEventListener('click', function()
+        {
+            let name = document.getElementById('name').value;
+            let email = document.getElementById('email').value;
+            let sujet = document.getElementById('subject').value;
+            let message = document.getElementById('message').value;
+
+            //verifier si les champs ne sont pas vides.
+            if((name == "" || email == "" || sujet == "" || message == "")) 
+            {
+                alert('Tout les champs ne sont pas remplis.');
+            }
+            else
+            {
+                alert('Bonjour ' + name + ' votre message à propos de (' + sujet + ') a bien été soumis, je vous recontacterai via votre adresse mail: ' + email + ' dés que possible, merci.');
+
+                //Ajout d'un timeout de 0.1 secondes pour charger la page d'acceuil sinon elle ne se charge pas.
+                setTimeout( () => {
+                window.location ='{{ path('homepage') }}';  
+                }, 100);  
+            }
+        });
+    </script>
+
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
