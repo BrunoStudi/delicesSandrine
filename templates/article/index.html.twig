@@ -28,13 +28,24 @@
             connecté, puis toutes les recettes affichées pour l'administrateur #}
             {% if (app.user.diet == article.dietFood) or is_granted('ROLE_ADMIN') %}
                 <div class="mx-auto mt-5">
-                    <h3 class="text-center h5 py-3 pl-3 rounded border-bottom border-success bg-success">{{ article.title }}</h3>
-                    <div class="text-center rounded border border-success" style="background-image: url(./media/back.png); overflow-y: auto">
+                    {# Couleur de fond differente en fonction du regime #}
+                    {% if (article.dietFood == "Végétarien") %}
+                        <h3 class="text-center h5 py-3 pl-3 rounded bg-success">{{ article.title }}</h3>
+                        <div class="text-center rounded border border-success" style="background-image: url(./media/back.png); overflow-y: auto">
                         <img class="mx-2 mt-2 mb-4 rounded img-fluid" style="width: 360px" 
                         alt="img" src="./uploads/images/{{ article.image }}">
                         <p class="px-3 h6">{{ article.content|nl2br }}</p></br>
                     </div>
-
+                    {% endif %}
+                    {% if (article.dietFood == "Sans sel") %}
+                        <h3 class="text-center h5 py-3 pl-3 rounded bg-light">{{ article.title }}</h3>
+                        <div class="text-center rounded border border-secondary" style="background-image: url(./media/back.png); overflow-y: auto">
+                        <img class="mx-2 mt-2 mb-4 rounded img-fluid" style="width: 360px" 
+                        alt="img" src="./uploads/images/{{ article.image }}">
+                        <p class="px-3 h6">{{ article.content|nl2br }}</p></br>
+                    </div>
+                    {% endif %}
+                    
                     <div class="mt-5 text-center border-bottom border-success-light">
                         <ul class="list-unstyled">
                             <li class="mt-2 mt-3">

@@ -5,7 +5,7 @@
 {% block content %}
     <div class="container-fluid">
         <h4 class="text-center mt-3 mb-5">Votre diététicienne et diététicienne du sport</h4>
-        <div class="rounded border border-success row" style="background-image: url(./media/back.png)">
+        <div class="rounded row" id="p-acceuil" style="background-image: url(./media/back.png)">
             <img class="img-fluid" src="./media/acceuil.jpg">
             <div class="ml-2 col">
                 <p class="h2  mt-3 mb-5">Vous souhaitez:</p>
@@ -27,6 +27,10 @@
 
 {% block stylesheets %}
     <style>
+        #p-acceuil {
+            border: 1px solid #FECFDF;
+        }
+
         #btn-info {
             border: 1px solid lightgray;
             background-color: #FD6C9E;
@@ -45,5 +49,4 @@
             color: black;
         }
     </style>
-
 {% endblock %}
