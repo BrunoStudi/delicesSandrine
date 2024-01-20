@@ -34,6 +34,9 @@ class Diet
         return $this;
     }
 
+    /* conversion en string de DietName.(necessaire pour la recuperation de DietName 
+    lors de la creation d'un utilisateur en mode admin sinon erreur de recuperation 
+    entity nous on veut un "string".)*/
     public function __toString(): string
     {
         return $this->getDietName();

@@ -19,13 +19,23 @@
         </div>
         <div class="mt-5 text-center">
             <p style="font-size: 20px">Pour plus d'informations, 
-            <span class="badge badge-success text-wrap" style="font-size: 23px">
+            <span class="badge badge-success text-wrap" style="font-size: 23px" id="btn-info">
             <a class="text-white" style="text-decoration: none" href="{{ path('contact') }}">Contactez-moi.</a></span></p>
         </div>
     </div>
-
 {% endblock %}
 
 {% block stylesheets %}
+    <style>
+        #btn-info {
+                border: 1px solid lightgray;
+            }
+           
+        #btn-info:hover {
+                color: lightgray;
+                background-color: #556B2F;
+                border: 1px solid black;
+            }
+    </style>
 
 {% endblock %}

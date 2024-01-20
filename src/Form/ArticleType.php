@@ -36,13 +36,13 @@ class ArticleType extends AbstractType
         //imageUpload
         $builder->add('imagePlat', FileType::class, [
                 'label' => 'image du plat (jpg, jpeg, png uniquement):',
-                // unmapped means that this field is not associated to any entity property
+                // unmapped signifie que le champ n'est pas associé à une propriété d'entité.
                 'mapped' => false,
-                // make it optional so you don't have to re-upload the PDF file
-                // every time you edit the Product details
+                /* rendez-le facultatif afin que vous n'ayez pas à télécharger à nouveau le fichier
+                   a chaque fois que vous editez les details de la recette.*/
                 'required' => true,
-                // unmapped fields can't define their validation using attributes
-                // in the associated entity, so you can use the PHP constraint classes
+                /* les champs unmapped ne peuvent pas définir leur validation à l'aide d'attributs
+                   dans l'entité associée, vous pouvez donc utiliser les classes de contraintes PHP*/
                 'constraints' => [
                     new File([
                         'maxSize' => '2048k',
@@ -61,6 +61,7 @@ class ArticleType extends AbstractType
             'label' => 'Contenu du plat:'
         ]);
 
+        // choix du régime en récupérant les valeurs dans l'entity Diet (qui contient les regimes).
         $builder->add('dietFood', EntityType::class, [
             'class' => Diet::class,
             'choice_label' => 'dietName',
@@ -71,12 +72,12 @@ class ArticleType extends AbstractType
             }
         ]);
 
-        // Statut
+        // Recette publié ou non.
         $builder->add('isPublished', CheckboxType::class, [
-            'label' => 'Publier l\'article'
+            'label' => 'Publier la recette'
         ]);
 
-        // Bouton Envoyer
+        // Bouton Enregistrer.
         $builder->add('submit', SubmitType::class, array(
             'label' => 'Enregistrer'
         ));

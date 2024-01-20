@@ -24,26 +24,27 @@ class ArticleController extends AbstractController
     {
        //Entity Manager de Symfony
        $em = $doctrine->getManager();
-       //Tout les articles en base de données
+       //Toutes les recettes en base de données
        $articles = $em->getRepository(Article::class)->findAll();
+       //Afficher toutes les recettes.
        return $this->render('article/index.html.twig', [
            'articles' => $articles,
        ]);
     }
 
     /**
-     * Modifier / ajouter un article
+     * Modifier / ajouter une recette.
      */
     public function edit(PersistenceManagerRegistry $doctrine, Request $request, SluggerInterface $slugger, int $id=null): Response
     {
         $em = $doctrine->getManager();
 
         if($id) {
-            $mode = 'update';   //variable qui sert à detecter si on créer ou modifie un article
+            $mode = 'update';   // variable qui sert à detecter si on créer ou modifie une recette, ici modifier.
             $article = $em->getRepository(Article::class)->findOneBy(['id' => $id]);
         }
         else {
-            $mode = 'new';
+            $mode = 'new';      // ici, nouvelle recette.
             $article = new Article();
         }
 
@@ -63,7 +64,7 @@ class ArticleController extends AbstractController
                 // ceci est necessaire pour inclure le nom du fichier dans l'URL de façon sécurisé.
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
-                // Déplacer le ficheir dans le repertoire approprié.
+                // Déplacer le fichier dans le repertoire approprié.
                 try {
                     $imageFile->move(
                         $this->getParameter('images_directory'),
@@ -81,7 +82,6 @@ class ArticleController extends AbstractController
                 $em->flush();
             }
 
-            //return $this->redirectToRoute('article_edit', array('id' => $article->getId()));
             return $this->redirectToRoute('article_show');
         }
 
@@ -95,16 +95,16 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * Supprimer un article
+     * Supprimer une recette
      */
     public function remove(int $id, PersistenceManagerRegistry $doctrine): Response
     {
         // Entity Manager de Symfony
         $em = $doctrine->getManager();
-        // On récupère l'article qui correspond à l'id passé dans l'url
+        // On récupère la recette qui correspond à l'id passé dans l'url.
         $article = $em->getRepository(Article::class)->findBy(['id' => $id]) [0];
 
-        // L'article est supprimé
+        // La recette est supprimée.
         $em->remove($article);
         $em->flush();
 
@@ -112,7 +112,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * Compléter l'article avec des informations avant enregistrement
+     * Compléter la recette avec des informations avant enregistrement
      * 
      * @param   Article     $article
      * @param   string      $mode
@@ -130,7 +130,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * Enregistrer un article en base de données
+     * Enregistrer une recette en base de données
      * 
      * @param   Article     $article
      * @param   string      $mode

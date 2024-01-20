@@ -17,15 +17,17 @@ class HomeController extends AbstractController
      */
     public function index(PersistenceManagerRegistry $doctrine): Response
     {
-        //Entity Manager de Symfony
+        // Entity Manager de Symfony
         $em = $doctrine->getManager();
-        //Tout les articles en base de données
+        // Récupérer toutes les recettes en base de données
         $articles = $em->getRepository(Article::class)->findAll();
+        // Afficher toutes les recettes sur la page.
         return $this->render('home/index.html.twig', [
             'articles' => $articles,
         ]);
     }
 
+    // Page formulaire de contact.
     public function contact()
     {
         return $this->render('contact/contact.html.twig');

@@ -19,6 +19,7 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            // Ajout d'un utilisateur.
             ->add('username', TextType::class, [
                 'mapped' => false,
                 'constraints' => [
@@ -27,13 +28,14 @@ class RegistrationFormType extends AbstractType
                     ]),
                     new Length([
                         'min' => 3,
-                        'minMessage' => 'Votre nom d\'utilisateur doit contenir au moins {{ limit }} caractères.',
+                        // ici limit ce reference à la variable 'min'.
+                        'minMessage' => 'Votre nom d\'utilisateur doit contenir au moins {{ limit }} caractères.', 
                     ]),
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
+                /* au lieu d'être placé directement sur l'objet,
+                   ceci est lu et encodé dans le contrôleur*/
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
@@ -43,11 +45,12 @@ class RegistrationFormType extends AbstractType
                     new Length([
                         'min' => 6,
                         'minMessage' => 'Votre mot de passe doit avoir au moins {{ limit }} caractères',
-                        // max length allowed by Symfony for security reasons
+                        // longueur maximale autorisée par Symfony pour des raisons de sécurité.
                         'max' => 4096,
                     ]),
                 ],
             ])
+            // Ajout du régime en recuperant en BDD.
             ->add('diet', EntityType::class, [
                 'class' => Diet::class,
                 'choice_label' => 'dietName',

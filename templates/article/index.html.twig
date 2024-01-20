@@ -10,6 +10,7 @@
                 <h1 class="page-header text-center my-5">Mes recettes</h1>
             </div>
         </div>
+        {# Si connecté en Administrateur #}
         {% if is_granted('ROLE_ADMIN')%}
             <div class="col alert alert-success" role="alert">
                 <div class="col-xs-3 text-right">
@@ -20,8 +21,11 @@
             </div>
         {% endif %}
     </div>
+    
     <div class="container-fluid">
         {% for article in articles %}
+            {# Les recettes affichées correspondent uniquement au regime de l'utilisateur 
+            connecté, puis toutes les recettes affichées pour l'administrateur #}
             {% if (app.user.diet == article.dietFood) or is_granted('ROLE_ADMIN') %}
                 <div class="mx-auto mt-5">
                     <h3 class="text-center h5 py-3 pl-3 rounded border-bottom border-success bg-success">{{ article.title }}</h3>

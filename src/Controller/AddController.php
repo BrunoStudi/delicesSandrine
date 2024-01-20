@@ -17,6 +17,7 @@ use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
 
 class AddController extends AbstractController
 {
+    // Ajouter un utilisateur via administration.
     #[Route('/adduser', name: 'app_add')]
     public function register(Request $request, UserPasswordHasherInterface $passwordHasher, 
     UserAuthenticatorInterface $userAuthenticator, PersistenceManagerRegistry $doctrine): Response
@@ -28,7 +29,7 @@ class AddController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
            $user->setUsername($form->get('username')->getData());
            
-            // encode the plain password
+            // hasher le mot de pass.
             $user->setPassword(
                 $passwordHasher->hashPassword(
                     $user,
@@ -36,14 +37,15 @@ class AddController extends AbstractController
                 )
             );
 
+            // Enregistrement en BDD.
             $entityManager = $doctrine->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // do anything else you need here, like send an email
             return $this->redirectToRoute('app_gusers');
         }
 
+        // Création de la vue pour ajouter l'utilisateur.
         return $this->render('registration/add.html.twig', [
             'registrationForm' => $form->createView(),
         ]);

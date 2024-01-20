@@ -3,7 +3,6 @@
 {% block title %}Edition recette{% endblock %}
 
 {% block content %}
-
     {# Titre de la page #}
     <div class="row">
         <div class="col-lg-12">
@@ -17,6 +16,7 @@
         {# ------------------------- #}
         {#      INFOS GÉNÉRALES      #}
         {# ------------------------- #}
+
         {% if mode == 'update' %}
         <div class="panel-heading">
             <h4 class="panel-title" id="contact-panel-title">
@@ -26,7 +26,6 @@
         {% endif %}
 
         <div id="info" class="panel-collapse">
-
             </br></br>    
             {{ include('helpers/form/_group.html.twig', {
                         'field': form['title']
@@ -44,8 +43,7 @@
                 {{ include('helpers/form/_group.html.twig', {
                             'field': form['dietFood']
                         }) }}</br>
-            {% endif %}
-                    
+            {% endif %}         
         </div>
 
         {# -------------------------------- #}
@@ -89,11 +87,8 @@
         </div>
 
         {{ form_widget(form) }}
-
         {{ form_end(form) }}
-
     </div>
-
 {% endblock %}
 
 {% block stylesheets %}
