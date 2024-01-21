@@ -40,8 +40,7 @@ security:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/(login|register), roles: PUBLIC_ACCESS}
-        - { path: ^/(homepage), roles: PUBLIC_ACCESS}
-        - { path: ^/(contact), roles: PUBLIC_ACCESS}
+        - { path: ^/(homepage|contact), roles: PUBLIC_ACCESS}
         - { path: ^/, roles: IS_AUTHENTICATED_FULLY}
 
 when@test:

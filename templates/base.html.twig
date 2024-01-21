@@ -28,8 +28,19 @@
         <div class="collapse navbar-collapse" id="mobileMenu">
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                 {% if app.user %}
+                    <li class="nav-item">
+                        <span class="nav-link">Bienvenue {% if is_granted('ROLE_ADMIN') %}Administrateur
+                        {% else %}{{ app.user.username }}{% endif %} !</span>
+                    </li>
+                    {% if (not is_granted("ROLE_ADMIN")) %}
+                        <li class="nav-item">
+                            <span class="nav-link">Votre régime: {{ app.user.diet }}.</span>
+                        </li>
+                    {% endif %}
+                {% endif %}
+                {% if not app.user %}
                 <li class="nav-item">
-                    <span class="nav-link">Bienvenue {{ app.user.username }} !</span>
+                    <span class="nav-link">Bienvenue visiteur !</span>
                 </li>
                 {% endif %}
 
