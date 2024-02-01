@@ -10,67 +10,118 @@
     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
     crossorigin="anonymous">
-
-    {% block stylesheets %}
-    {% endblock %}
-
     <title>Sandrine Coupart - {% block title %}{% endblock %}</title>
+
+    {% block stylesheet %}
+        <style>
+            {# ------Déclaration polices perso------ #}
+            @font-face {
+                font-family: "SC";
+                font-weight: 400;
+                src: url("media/polices/SaintCarell.otf") format("opentype");
+            }
+            @font-face {
+                font-family: "Birds";
+                font-weight: 400;
+                src: url("media/polices/BirdsOfParadise.ttf") format("truetype");
+            }
+            @font-face {
+                font-family: "Typo";
+                font-weight: 400;
+                src: url("media/polices/TypoRoundRegular.otf") format("opentype");
+            }
+
+            {# --------Page d'Acceuil-------- #}
+            #titreText {
+                font-size: 5vw;
+                font-family: "SC";
+            }
+            #accroche {
+                font-size: 3vw;
+                font-family: "Birds";
+            }
+
+            {# --------Page Contact--------- #}
+            #p-acceuil {
+            border: 1px solid #FECFDF;
+            }
+            #btn-info {
+                border: 1px solid lightgray;
+                background-color: #FD6C9E;
+            }
+            #btn-info:hover {
+                background-color: #FECFDF;
+                border: 1px solid black;
+                color: black;
+            }
+             #btn-envoi {
+            background-color: #FD6C9E;
+            }
+            #btn-envoi:hover {
+                color: black;
+                background-color: #FECFDF;
+                cursor: pointer;
+            }
+        </style>
+    {% endblock %}
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #FD6C9E;">
-    <img src={{asset('media/logo.jpg')}} alt="image plats légumes" class="rounded mr-2" width = "10%">
-        <a class="navbar-brand text-uppercase" href="{{ path('homepage') }}" style="font-size: 50px">Sandrine Coupart</a>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #FD6C9E">
+        <div class="container-fluid">
+        <img src={{asset('media/logo.jpg')}} alt="image plats légumes" class="rounded mr-2" width = "10%">
+        <a class="navbar-brand" id="titreText" href="{{ path('homepage') }}">Sandrine Coupart</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobileMenu" 
-        aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+                aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="mobileMenu">
-            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                {% if app.user %}
-                    <li class="nav-item">
-                        <span class="nav-link">Bienvenue {% if is_granted('ROLE_ADMIN') %}Administrateur
-                        {% else %}{{ app.user.username }}{% endif %} !</span>
-                    </li>
-                    {% if (not is_granted("ROLE_ADMIN")) %}
+            <div class="collapse navbar-collapse" id="mobileMenu">
+                <ul class="navbar-nav ml-auto">
+                    {% if app.user %}
                         <li class="nav-item">
-                            <span class="nav-link">Votre régime: {{ app.user.diet }}.</span>
+                            <span class="nav-link">Bienvenue {% if is_granted('ROLE_ADMIN') %}Administrateur
+                            {% else %}{{ app.user.username }}{% endif %} !</span>
+                        </li>
+                        {% if (not is_granted("ROLE_ADMIN")) %}
+                            <li class="nav-item">
+                                <span class="nav-link">Votre régime: {{ app.user.diet }}.</span>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                    {% if not app.user %}
+                    <li class="nav-item">
+                        <span class="nav-link">Bienvenue visiteur !</span>
+                    </li>
+                    {% endif %}
+
+                    <li class="nav-item {{ app.request.get('_route') == 'homepage' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ path('homepage') }}">Accueil</a>
+                    </li>
+                
+                    <li class="nav-item {{ app.request.get('_route') == 'article_show' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ path('article_show') }}">Mes Recettes</a>
+                    </li>
+                    {# Si connecté en Administrateur. #}
+                    {% if is_granted('ROLE_ADMIN')%}
+                        <li class="nav-item {{ app.request.get('_route') == 'app_gusers' ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ path('app_gusers') }}">Gestion des utilisateurs</a>
                         </li>
                     {% endif %}
-                {% endif %}
-                {% if not app.user %}
-                <li class="nav-item">
-                    <span class="nav-link">Bienvenue visiteur !</span>
-                </li>
-                {% endif %}
 
-                <li class="nav-item {{ app.request.get('_route') == 'homepage' ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ path('homepage') }}">Accueil</a>
-                </li>
-               
-                <li class="nav-item {{ app.request.get('_route') == 'article_show' ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ path('article_show') }}">Mes Recettes</a>
-                </li>
-                {# Si connecté en Administrateur. #}
-                {% if is_granted('ROLE_ADMIN')%}
-                    <li class="nav-item {{ app.request.get('_route') == 'app_gusers' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ path('app_gusers') }}">Gestion des utilisateurs</a>
+                    {% if app.user %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
                     </li>
-                {% endif %}
-
-                {% if app.user %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
-                </li>
-                {% else %}
-                <li class="nav-item {{ app.request.get('_route') == 'app_login' ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
-                </li>
-                <li class="nav-item {{ app.request.get('_route') == 'app_register' ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
-                </li>
-                {% endif %}
-            </ul>
+                    {% else %}
+                    <li class="nav-item {{ app.request.get('_route') == 'app_login' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                    </li>
+                    <li class="nav-item {{ app.request.get('_route') == 'app_register' ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
     </nav>
 
@@ -91,5 +142,4 @@
     crossorigin="anonymous"></script>
     {% endblock %}
 </body>
-
 </html>
