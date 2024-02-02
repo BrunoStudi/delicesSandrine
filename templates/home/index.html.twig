@@ -28,20 +28,5 @@
     </div>
 {% endblock %}
 
-{% block scripts %}
-    <script>
-        const btn = document.getElementById("btn-info");
 
-        function goContact ()
-        {
-            window.location ='{{ path('contact') }}';
-        }
-       
-       btn.addEventListener("click", (e) =>
-        {
-            e.preventDefault();
-            goContact(); 
-        });
-    </script>
-{% endblock %}
 
