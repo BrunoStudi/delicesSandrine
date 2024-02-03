@@ -7,12 +7,13 @@
         {# Titre de la page #}
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header text-center my-5">Mes recettes</h1>
+                <h1 class="page-header text-center my-5" id="titreRecettes">Mes recettes</h1>
             </div>
         </div>
         {# Si connecté en Administrateur #}
         {% if is_granted('ROLE_ADMIN')%}
             <div class="col alert alert-success" role="alert">
+                <p class="float-left h3">Administration</p>
                 <div class="col-xs-3 text-right">
                     <a href="{{ path('article_add') }}" role="button" class="btn btn-success">
                         <i class="fa fa-plus fa-fw"></i> Ajouter une recette
@@ -31,7 +32,8 @@
                     {# Couleur de fond differente en fonction du regime #}
                     {% if (article.dietFood == "Végétarien") %}
                         <h3 class="text-center h5 py-3 pl-3 rounded bg-success">{{ article.title }}</h3>
-                        <div class="text-center rounded border border-success" style="background-image: url(./media/back.png); overflow-y: auto">
+                        <div class="text-center rounded border border-success" style="background-image: url(./media/back.png); 
+                        overflow-y: auto; box-shadow: 5px 5px 5px rgb(133, 133, 133);">
                         <img class="mx-2 mt-2 mb-4 rounded img-fluid" style="width: 360px" 
                         alt="img" src="./uploads/images/{{ article.image }}">
                         <p class="px-3 h6" id="textStyle">{{ article.content|nl2br }}</p></br>
@@ -39,7 +41,8 @@
                     {% endif %}
                     {% if (article.dietFood == "Sans sel") %}
                         <h3 class="text-center h5 py-3 pl-3 rounded bg-light">{{ article.title }}</h3>
-                        <div class="text-center rounded border border-secondary" style="background-image: url(./media/back.png); overflow-y: auto">
+                        <div class="text-center rounded border border-secondary" style="background-image: url(./media/back.png); 
+                        overflow-y: auto; box-shadow: 5px 5px 5px rgb(133, 133, 133);">
                         <img class="mx-2 mt-2 mb-4 rounded img-fluid" style="width: 360px" 
                         alt="img" src="./uploads/images/{{ article.image }}">
                         <p class="px-3 h6" id="textStyle">{{ article.content|nl2br }}</p></br>
@@ -47,7 +50,8 @@
                     {% endif %}
                     {% if (article.dietFood == "Sans lactose") %}
                         <h3 class="text-center h5 py-3 pl-3 rounded bg-info">{{ article.title }}</h3>
-                        <div class="text-center rounded border border-info" style="background-image: url(./media/back.png); overflow-y: auto">
+                        <div class="text-center rounded border border-info" style="background-image: url(./media/back.png); 
+                        overflow-y: auto; box-shadow: 5px 5px 5px rgb(133, 133, 133);">
                         <img class="mx-2 mt-2 mb-4 rounded img-fluid" style="width: 360px" 
                         alt="img" src="./uploads/images/{{ article.image }}">
                         <p class="px-3 h6" id="textStyle">{{ article.content|nl2br }}</p></br>
@@ -55,7 +59,8 @@
                     {% endif %}
                     {% if (article.dietFood == "Sans gluten") %}
                         <h3 class="text-center h5 py-3 pl-3 rounded bg-secondary">{{ article.title }}</h3>
-                        <div class="text-center rounded border border-secondary" style="background-image: url(./media/back.png); overflow-y: auto">
+                        <div class="text-center rounded border border-secondary" style="background-image: url(./media/back.png); 
+                        overflow-y: auto; box-shadow: 5px 5px 5px rgb(133, 133, 133);">
                         <img class="mx-2 mt-2 mb-4 rounded img-fluid" style="width: 360px" 
                         alt="img" src="./uploads/images/{{ article.image }}">
                         <p class="px-3 h6" id="textStyle">{{ article.content|nl2br }}</p></br>
@@ -63,7 +68,8 @@
                     {% endif %}
                     {% if (article.dietFood == "Hyperprotéiné (Sportifs)") %}
                         <h3 class="text-center h5 py-3 pl-3 rounded bg-warning">{{ article.title }}</h3>
-                        <div class="text-center rounded border border-warning" style="background-image: url(./media/back.png); overflow-y: auto">
+                        <div class="text-center rounded border border-warning" style="background-image: url(./media/back.png); 
+                        overflow-y: auto; box-shadow: 5px 5px 5px rgb(133, 133, 133);">
                         <img class="mx-2 mt-2 mb-4 rounded img-fluid" style="width: 360px" 
                         alt="img" src="./uploads/images/{{ article.image }}">
                         <p class="px-3 h6" id="textStyle">{{ article.content|nl2br }}</p></br>
@@ -71,7 +77,8 @@
                     {% endif %}
                     {% if (article.dietFood == "Aucun" or "") %}
                         <h3 class="text-center h5 py-3 pl-3 rounded bg-danger">{{ article.title }}</h3>
-                        <div class="text-center rounded border border-danger" style="background-image: url(./media/back.png); overflow-y: auto">
+                        <div class="text-center rounded border border-danger" style="background-image: url(./media/back.png); 
+                        overflow-y: auto; box-shadow: 5px 5px 5px rgb(133, 133, 133);">
                         <img class="mx-2 mt-2 mb-4 rounded img-fluid" style="width: 360px" 
                         alt="img" src="./uploads/images/{{ article.image }}">
                         <p class="px-3 h6" id="textStyle">{{ article.content|nl2br }}</p></br>

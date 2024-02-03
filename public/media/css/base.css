@@ -71,3 +71,13 @@
     background-color: #FECFDF;
     cursor: pointer;
 }
+
+#titreRecettes {
+    font-size: 3vw;
+    font-family: "Birds";
+}
+
+#titreUsers {
+    font-size: 3vw;
+    font-family: "Birds";
+}
