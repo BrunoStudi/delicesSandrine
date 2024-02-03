@@ -5,78 +5,31 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" 
     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
     crossorigin="anonymous">
+
+    <!-- Base CSS -->
+    <link rel="stylesheet" href="./media/css/base.css">
+
     <title>Sandrine Coupart - {% block title %}{% endblock %}</title>
-
-    {% block stylesheet %}
-        <style>
-            {# ------Déclaration polices perso------ #}
-            @font-face {
-                font-family: "SC";
-                font-weight: 400;
-                src: url("media/polices/SaintCarell.otf") format("opentype");
-            }
-            @font-face {
-                font-family: "Birds";
-                font-weight: 400;
-                src: url("media/polices/BirdsOfParadise.ttf") format("truetype");
-            }
-            @font-face {
-                font-family: "Typo";
-                font-weight: 400;
-                src: url("media/polices/TypoRoundRegular.otf") format("opentype");
-            }
-
-            {# --------Page d'Acceuil-------- #}
-            #titreText {
-                font-size: 5vw;
-                font-family: "SC";
-            }
-            #accroche {
-                font-size: 3vw;
-                font-family: "Birds";
-            }
-
-            {# --------Page Contact--------- #}
-            #p-acceuil {
-            border: 1px solid #FECFDF;
-            }
-            #btn-info {
-                border: 1px solid lightgray;
-                background-color: #FD6C9E;
-            }
-            #btn-info:hover {
-                background-color: #FECFDF;
-                border: 1px solid black;
-                color: black;
-            }
-             #btn-envoi {
-            background-color: #FD6C9E;
-            }
-            #btn-envoi:hover {
-                color: black;
-                background-color: #FECFDF;
-                cursor: pointer;
-            }
-        </style>
-    {% endblock %}
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #FD6C9E">
+    <nav class="navbar navbar-expand-lg navbar-dark" id="navBackground">
         <div class="container-fluid">
-        <img src={{asset('media/logo.jpg')}} alt="image plats légumes" class="rounded mr-2" width = "10%">
+        <img src={{asset('media/logo.jpg')}} alt="image plats légumes" class="rounded mr-2" id="imgLogo">
         <a class="navbar-brand" id="titreText" href="{{ path('homepage') }}">Sandrine Coupart</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobileMenu" 
-                aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
         </button>
             <div class="navbar-collapse collapse" id="mobileMenu">
                 <ul class="navbar-nav ml-auto">
+                    {# si l'utilisateur est connecté #}
                     {% if app.user %}
                         <li class="nav-item">
                             <span class="nav-link">Bienvenue {% if is_granted('ROLE_ADMIN') %}Administrateur
@@ -88,6 +41,8 @@
                             </li>
                         {% endif %}
                     {% endif %}
+                    
+                    {# si l'utilisateur est un visiteur #}
                     {% if not app.user %}
                     <li class="nav-item">
                         <span class="nav-link">Bienvenue visiteur !</span>
@@ -101,6 +56,7 @@
                     <li class="nav-item {{ app.request.get('_route') == 'article_show' ? 'active' : '' }}">
                         <a class="nav-link" href="{{ path('article_show') }}">Mes Recettes</a>
                     </li>
+
                     {# Si connecté en Administrateur. #}
                     {% if is_granted('ROLE_ADMIN')%}
                         <li class="nav-item {{ app.request.get('_route') == 'app_gusers' ? 'active' : '' }}">
@@ -130,7 +86,7 @@
     </div>
     
     {% block scripts %}
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    {# jQuery en premier, puis Popper.js et Bootstrap JS #}
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 
     crossorigin="anonymous"></script>
@@ -141,69 +97,9 @@
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
     crossorigin="anonymous"></script>
 
-    {# fichier script js pour utiliser l'alert personnalisée de la page contact. #}
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     {# Script pour appeler la page contact depuis la page d'acceuil #}
-    <script>
-        const btn = document.getElementById("btn-info");
-
-        function goContact ()
-        {
-            window.location ='{{ path('contact') }}';
-        }
-       
-        btn.addEventListener("click", (e) =>
-        {
-            e.preventDefault();
-            goContact(); 
-        });
-    </script>
-
-    {# Script pour gérer les champs et l'alerte personalisée de la page contact #}
-    <script>
-        const form = document.querySelector("form");
-            
-            function sendEmail()
-            {
-                // Récupération des champs rempli par l'utilisateur.
-                const name = document.getElementById('name').value;
-                const email = document.getElementById('email').value;
-                const sujet = document.getElementById('subject').value;
-                const message = document.getElementById('message').value;
-
-                // verifier si les champs ne sont pas vides.
-                if((name == "" || email == "" || sujet == "" || message == "")) 
-                {
-                    Swal.fire({
-                        title: "Erreur",
-                        text: "Un ou plusieurs champs sont vides",
-                        icon: "error"
-                    });
-                }
-                else
-                // Sinon on envoi le message "avec success".
-                {
-                    /* ici on peu inserer une fonction pour envoyer réellement un email suivi du message. */
-                    Swal.fire({
-                        title: "Message envoyé",
-                        text: "Merci de m'avoir contacté, je vous recontacterai au plus vite sur l'adresse mail renseignée.",
-                        icon: "success"
-                    });
-
-                    // ici un delais de 5 secondes afin de recharger la page d'acceuil.
-                    setTimeout( () => {
-                    window.location ='{{ path('homepage') }}';  
-                    }, 5000);
-                }
-            }
-            // action dés que submit est invoqué.
-            form.addEventListener("submit", (e) =>
-            {
-                e.preventDefault();
-                sendEmail(); 
-            });
-    </script>
+    <script src="media/js/contact.js"></script>
+    
     {% endblock %}
 </body>
 </html>

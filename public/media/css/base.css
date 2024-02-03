@@ -1,0 +1,73 @@
+/* declaration des polices personalisées */
+@font-face {
+    font-family: "SC";
+    font-weight: 400;
+    src: url("../polices/SaintCarell.otf") format("opentype");
+}
+@font-face {
+    font-family: "Birds";
+    font-weight: 400;
+    src: url("../polices/BirdsOfParadise.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Nature";
+    font-weight: 400;
+    src: url("../polices/Natures.ttf") format("truetype");
+}
+
+/* Style Nav */
+#imgLogo {
+    width: 10%;
+}
+#titreText {
+    font-size: 5vw;
+    font-family: "SC";
+}
+#navBackground {
+    background-color: #FD6C9E
+}
+
+/* Police pour la page d'acceuil du site (Homepage) */
+#accroche {
+    font-size: 3vw;
+    font-family: "Birds";
+}
+#p-acceuil {
+    background-image: url("/media/back.png");
+    border: 1px solid #FECFDF;
+    box-shadow: 5px 5px 5px rgb(133, 133, 133);
+}
+#textStyle {
+    font-family: "Nature";
+    font-size: 20px;
+}
+
+/* Style du bouton contactez moi, en page d'acceuil */
+#btn-info {
+    border: 1px solid lightgray;
+    background-color: #FD6C9E;
+}
+#btn-info:hover {
+    background-color: #FECFDF;
+    border: 1px solid black;
+    color: black;
+}
+
+/* Style du bouton envoi de la page contact */
+#titreContact {
+    font-size: 3vw;
+    font-family: "Birds";
+}
+#message {
+    resize: none;
+    box-shadow: 5px 5px 5px rgb(133, 133, 133);
+}
+#btn-envoi {
+    background-color: #FD6C9E;
+    font-family: "Nature";
+}
+#btn-envoi:hover {
+    color: black;
+    background-color: #FECFDF;
+    cursor: pointer;
+}

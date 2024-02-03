@@ -5,14 +5,24 @@
 {% block content %}
 {# Formulaire de contact #}
     <div class="container-fluid">
-        <h1 class="text-center mt-5 pb-2 border-bottom border-success">Formulaire de contact</h1>
+        <h1 class="text-center mt-5 pb-2 border-bottom border-success" id="titreContact">Formulaire de contact</h1>
         <form class="text-center mt-5" method="post">
             <input class="rounded mb-2" type="text" placeholder="Entrez votre nom" id="name" autocomplete="off"></br>
             <input class="rounded mb-2" type="email" placeholder="Entrez votre adresse mail" id="email" autocomplete="off"></br>
             <input class="rounded mb-5" type="text" placeholder="Sujet du message" id="subject" autocomplete="off"></br>
-            <textarea class="rounded" id="message" placeholder="Rédigez votre message ici" cols="50" rows="10" style="resize: none"></textarea></br>
+            <textarea class="rounded" id="message" placeholder="Rédigez votre message ici" cols="50" rows="10"></textarea></br>
             <button  type="submit" class="rounded mt-3 badge badge-success" style="font-size: 20px" id="btn-envoi">Envoyer</button> 
         </form>
     </div>
+{% endblock %}
+
+{% block scripts %}
+
+{# Script pour utiliser l'alert personnalisée de la page contact. #}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{# Script pour gérer les champs et l'alerte personalisée de la page contact #}
+<script src="media/js/alertMail.js"></script>
+
 {% endblock %}
    
