@@ -72,12 +72,17 @@
     cursor: pointer;
 }
 
+/* Style pour la page Recettes */
 #titreRecettes {
     font-size: 3vw;
     font-family: "Birds";
 }
 
+/* Style pour la page gestion utilisateurs */
 #titreUsers {
     font-size: 3vw;
     font-family: "Birds";
+}
+#tabUsers {
+    box-shadow: 5px 5px 5px rgb(133, 133, 133);
 }
