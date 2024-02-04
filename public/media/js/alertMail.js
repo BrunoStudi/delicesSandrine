@@ -24,7 +24,7 @@ function sendEmail()
         /* ici on peu inserer une fonction pour envoyer réellement un email suivi du message. */
         Swal.fire({
             title: "Message envoyé",
-            text: "Merci de m'avoir contacté, je vous recontacterai au plus vite sur l'adresse mail renseignée.",
+            text: "Merci de m'avoir contacté, je vous recontacterai au plus vite sur l'adresse email renseignée.",
             icon: "success"
         });
 
