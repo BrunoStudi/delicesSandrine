@@ -24,10 +24,10 @@
     font-family: "SC";
 }
 #navBackground {
-    background-color: #FD6C9E
+    background-color: #9E2B40
 }
 
-/* Police pour la page d'acceuil du site (Homepage) */
+/* Police et background pour la page d'acceuil du site (Homepage) */
 #accroche {
     font-size: 3vw;
     font-family: "Birds";
@@ -45,7 +45,7 @@
 /* Style du bouton contactez moi, en page d'acceuil */
 #btn-info {
     border: 1px solid lightgray;
-    background-color: #FD6C9E;
+    background-color: #9E2B40;
 }
 #btn-info:hover {
     background-color: #FECFDF;
@@ -53,7 +53,7 @@
     color: black;
 }
 
-/* Style du bouton envoi de la page contact */
+/* Style de la page contact */
 #titreContact {
     font-size: 3vw;
     font-family: "Birds";
@@ -63,7 +63,7 @@
     box-shadow: 5px 5px 5px rgb(133, 133, 133);
 }
 #btn-envoi {
-    background-color: #FD6C9E;
+    background-color: #9E2B40;
     font-family: "Nature";
 }
 #btn-envoi:hover {
@@ -72,17 +72,7 @@
     cursor: pointer;
 }
 
-/* Style pour la page Recettes */
-#titreRecettes {
-    font-size: 3vw;
-    font-family: "Birds";
-}
-
-/* Style pour la page gestion utilisateurs */
-#titreUsers {
-    font-size: 3vw;
-    font-family: "Birds";
-}
-#tabUsers {
+/* Style des ombres portees */
+#shadow {
     box-shadow: 5px 5px 5px rgb(133, 133, 133);
 }

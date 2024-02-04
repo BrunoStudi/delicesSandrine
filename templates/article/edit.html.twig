@@ -5,45 +5,46 @@
 {% block content %}
     {# Titre de la page #}
     <div class="row">
-        <div class="col-lg-12">
-            <h1 class="border-bottom page-header text-center mt-2 pb-2 mb-5">{% if mode == 'new' %}Ajout{% else %}Edition{% endif %} de  la recette</h1>
+        <div class="col-lg-12 my-5">
+            <h1 class="border-bottom page-header text-center pb-5" id="accroche">
+            {% if mode == 'new' %}Ajout{% else %}Edition{% endif %} de  la recette</h1>
         </div>
     </div>
 
     <div class="container">
-        {{ form_start(form, {'method': 'POST', 'attr': {'novalidate': 'novalidate' }} ) }}
+        {{ form_start(form, {'method': 'POST', 'attr': {'novalidate': 'novalidate' }, 
+        'attr': {'class': 'rounded border border-dark bg-light mb-5', 'id': 'shadow' }})}}
 
         {# ------------------------- #}
         {#      INFOS GÉNÉRALES      #}
         {# ------------------------- #}
 
         {% if mode == 'update' %}
-        <div class="panel-heading">
+        <div class="panel-heading pl-3 pt-2">
             <h4 class="panel-title" id="contact-panel-title">
-                <a data-group data-toggle="collapse" href="#info"><i class="fa fa-angle-double-down fa-fw"></i> Informations générales</a>
+                <a data-group data-toggle="collapse" href="#info"><i class="fa fa-angle-double-down fa-fw">
+                </i> Informations générales</a>
             </h4></br>
         </div>
         {% endif %}
 
-        <div id="info" class="panel-collapse">
-            </br></br>    
+        <div id="info" class="panel-collapse text-center my-5">
+               
             {{ include('helpers/form/_group.html.twig', {
                         'field': form['title']
-                    }) }}
+                    }) }}</br>
 
             {{ include('helpers/form/_group.html.twig', {
                         'field': form['content']
-                    }) }}</br></br>
+                    }) }}</br>
+
+            {{ include('helpers/form/_group.html.twig', {
+                        'field': form['dietFood']
+                    }) }}</br> 
                     
             {{ include('helpers/form/_group.html.twig', {
                         'field': form['imagePlat']
-                    }) }}</br>
-
-            {% if mode == 'update' %} 
-                {{ include('helpers/form/_group.html.twig', {
-                            'field': form['dietFood']
-                        }) }}</br>
-            {% endif %}         
+                    }) }}</br> 
         </div>
 
         {# -------------------------------- #}
@@ -52,13 +53,13 @@
         
         {% if mode == 'update' %}
         <div class="panel-heading" >
-            <h4 class="panel-title">
+            <h4 class="panel-title pl-3">
                 <a data-group data-toggle="collapse" href="#info-compl"><i class="fa fa-plus fa-fw"> Informations complémentaires</a>
             </h4>
         </div>
         
         <div id="info-compl" class="panel-collapse table-responsive">
-            <table class="table table-condensed fiche">
+            <table class="table table-condensed fiche text-center">
                 <tbody>
                     <tr>
                         <td>Publication</td>
@@ -81,13 +82,12 @@
             {% else %}
                 <div class="col-md-8"></div>
             {% endif %} 
-            <div class="col-md-4 text-right">
-                {{ form_widget(form.submit, { 'attr': {'class': 'btn btn-info'} }) }}
+            <div class="col-md-4 pr-5">
+                {{ form_widget(form.submit, { 'attr': {'class': 'btn btn-info float-right'} }) }}
             </div>
+            {{ form_widget(form, {'attr': {'class': 'float-left pl-5' } }) }}
+            {{ form_end(form) }}
         </div>
-
-        {{ form_widget(form) }}
-        {{ form_end(form) }}
     </div>
 {% endblock %}
 

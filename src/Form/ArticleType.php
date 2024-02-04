@@ -35,12 +35,12 @@ class ArticleType extends AbstractType
 
         //imageUpload
         $builder->add('imagePlat', FileType::class, [
-                'label' => 'image du plat (jpg, jpeg, png uniquement):',
+                'label' => 'image du plat (jpg, jpeg, png):',
                 // unmapped signifie que le champ n'est pas associé à une propriété d'entité.
                 'mapped' => false,
                 /* rendez-le facultatif afin que vous n'ayez pas à télécharger à nouveau le fichier
                    a chaque fois que vous editez les details de la recette.*/
-                'required' => true,
+                'required' => false,
                 /* les champs unmapped ne peuvent pas définir leur validation à l'aide d'attributs
                    dans l'entité associée, vous pouvez donc utiliser les classes de contraintes PHP*/
                 'constraints' => [
