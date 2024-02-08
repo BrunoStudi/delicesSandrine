@@ -33,7 +33,7 @@
                         <td>{{ User.diet }}</td>
                         <td>{{ User.roles [0] }}</td>
                         <td><a href="{{ path('user_removeUser', {'id': User.id}) }}" 
-                            role="button" class="btn btn-danger float-right">Supprimer</a>
+                            role="button" class="btn btn-danger float-right"><span class="fas fa-minus">&nbsp&nbsp</span>Supprimer</a>
                         </td>
                     </tr>
                 {% endfor %}

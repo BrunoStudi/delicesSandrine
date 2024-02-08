@@ -20,8 +20,9 @@
     width: 10%;
 }
 #titreText {
-    font-size: 5vw;
+    /*font-size: 5vw;*/
     font-family: "SC";
+    color: white;
 }
 #navBackground {
     background-color: #9E2B40

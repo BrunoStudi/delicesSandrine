@@ -22,48 +22,55 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark" id="navBackground">
-        <div class="container-fluid">
-        <img src={{asset('media/logo.jpg')}} alt="image plats légumes" class="rounded mr-2" id="imgLogo">
-        <a class="navbar-brand" id="titreText" href="{{ path('homepage') }}">Sandrine Coupart</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobileMenu" 
-        aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="pb-4 text-center" id="navBackground">
+            <img src={{asset('media/logo.jpg')}} alt="image plats légumes" class="rounded ml-3 mt-3 float-left" id="imgLogo">
+            <i id="titreText">Sandrine Coupart</i>
+        </div>
+        
+        {# MENU #}
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+        {# si l'utilisateur est connecté #}
+        {% if app.user %}
+            <i class="text-light">
+                <span>Bienvenue {% if is_granted('ROLE_ADMIN') %}Administrateur
+                {% else %}{{ app.user.username }}{% endif %} !</span>
+            </i>
+            {% if (not is_granted("ROLE_ADMIN")) %}
+                <i class="text-light">
+                    <span>Votre régime: {{ app.user.diet }}.</span>
+                </i>
+            {% endif %}
+        {% endif %}
+
+        {# si l'utilisateur est un visiteur #}
+        {% if not app.user %}
+            <i class="text-light">
+                <span>Bienvenue visiteur !</span>
+            </i>
+        {% endif %}
+
+            {# Menu bouton pour responsive #}
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobileMenu" 
+            aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="navbar-collapse collapse" id="mobileMenu">
                 <ul class="navbar-nav ml-auto">
-                    {# si l'utilisateur est connecté #}
-                    {% if app.user %}
-                        <li class="nav-item">
-                            <span class="nav-link">Bienvenue {% if is_granted('ROLE_ADMIN') %}Administrateur
-                            {% else %}{{ app.user.username }}{% endif %} !</span>
-                        </li>
-                        {% if (not is_granted("ROLE_ADMIN")) %}
-                            <li class="nav-item">
-                                <span class="nav-link">Votre régime: {{ app.user.diet }}.</span>
-                            </li>
-                        {% endif %}
-                    {% endif %}
                     
-                    {# si l'utilisateur est un visiteur #}
-                    {% if not app.user %}
-                    <li class="nav-item">
-                        <span class="nav-link">Bienvenue visiteur !</span>
-                    </li>
-                    {% endif %}
-
                     <li class="nav-item {{ app.request.get('_route') == 'homepage' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ path('homepage') }}">Accueil</a>
+                        <a class="nav-link" href="{{ path('homepage') }}"><span class="fas fa-home"></span> Accueil</a>
                     </li>
-                
+                        
                     <li class="nav-item {{ app.request.get('_route') == 'article_show' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ path('article_show') }}">Mes Recettes</a>
+                        <a class="nav-link" href="{{ path('article_show') }}"><span class="fas fa-utensils"></span> Mes Recettes</a>
                     </li>
 
                     {# Si connecté en Administrateur. #}
                     {% if is_granted('ROLE_ADMIN')%}
                         <li class="nav-item {{ app.request.get('_route') == 'app_gusers' ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ path('app_gusers') }}">Gestion des utilisateurs</a>
+                            <a class="nav-link" href="{{ path('app_gusers') }}">
+                            <span class="fas fa-user-friends"></span> Gestion des utilisateurs</a>
                         </li>
                     {% endif %}
 
@@ -81,9 +88,8 @@
                     {% endif %}
                 </ul>
             </div>
-        </div>
-    </nav>
-
+        </nav>
+    
     <div class="container-fluid">
     {% block content %}{% endblock %}
     </div>
