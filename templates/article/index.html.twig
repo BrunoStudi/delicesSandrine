@@ -92,7 +92,7 @@
                                     <a href="{{ path('article_edit', {'id': article.id}) }}" role="button" class="btn btn-info">
                                     <span class="fas fa-edit">&nbsp&nbsp</span>Modifier</a>
                                     <a href="{{ path('article_remove', {'id': article.id}) }}" role="button" class="btn btn-danger">
-                                    <span class="fas fa-minus">&nbsp&nbsp</span>Supprimer</a>
+                                    <span class="fas fa-trash-alt">&nbsp&nbsp</span>Supprimer</a>
                                 {% endif %}
                                 <li class="mt-4">Auteur: {{ article.author.username }}</li>
                                 <li class="mt-2">Publié le: {{ article.publishedAt | date("d-m-Y à H:i:s") }}</li>
