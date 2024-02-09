@@ -20,12 +20,17 @@
     width: 10%;
 }
 #titreText {
-    /*font-size: 5vw;*/
+    font-size: 5vw;
     font-family: "SC";
     color: white;
 }
 #navBackground {
-    background-color: #9E2B40
+    background-color: #9E2B40;
+    display: flex;
+    align-items: center;
+}
+#homeText {
+    font-size: 5vw;
 }
 
 /* Police et background pour la page d'acceuil du site (Homepage) */

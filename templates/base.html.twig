@@ -22,9 +22,9 @@
 </head>
 
 <body>
-        <div class="pb-4 text-center" id="navBackground">
-            <img src={{asset('media/logo.jpg')}} alt="image plats légumes" class="rounded ml-3 mt-3 float-left" id="imgLogo">
-            <i id="titreText">Sandrine Coupart</i>
+        <div id="navBackground">
+            <img src={{asset('media/logo.jpg')}} alt="image plats légumes" class="rounded ml-3 my-3" id="imgLogo">
+            <i class="ml-5" id="titreText">Sandrine Coupart</i>
         </div>
         
         {# MENU #}
@@ -32,13 +32,13 @@
 
         {# si l'utilisateur est connecté #}
         {% if app.user %}
-            <i class="text-light">
+            <i class="text-light" id="homeText">
                 <span>Bienvenue {% if is_granted('ROLE_ADMIN') %}Administrateur
                 {% else %}{{ app.user.username }}{% endif %} !</span>
             </i>
             {% if (not is_granted("ROLE_ADMIN")) %}
-                <i class="text-light">
-                    <span>Votre régime: {{ app.user.diet }}.</span>
+                <i class="text-light" id="homeText">
+                    <span>&nbsp Votre régime: {{ app.user.diet }}.</span>
                 </i>
             {% endif %}
         {% endif %}

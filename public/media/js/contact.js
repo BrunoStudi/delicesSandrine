@@ -7,8 +7,6 @@ function goContact ()
     window.location ="contact";
 }
        
-btn.addEventListener("click", (e) =>
-{
-    e.preventDefault();
+btn.onclick = function () {
     goContact(); 
-});
+};
