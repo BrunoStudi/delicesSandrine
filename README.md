@@ -1,3 +1,3 @@
-﻿# Les delices de Sandrine
+﻿# Sandrine Coupart - diététicienne
 
-a full website with users and admin user conexion about woman's food for my training
+A demo website with users and admin connexion about woman's food for my training.
