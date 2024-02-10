@@ -13,7 +13,7 @@
         {# Si connecté en Administrateur #}
         {% if is_granted('ROLE_ADMIN')%}
             <div class="col alert alert-success" role="alert">
-                <p class="float-left h3">Administration</p>
+                <p class="float-left h5">Administration</p>
                 <div class="col-xs-3 text-right">
                     <a href="{{ path('article_add') }}" role="button" class="btn btn-success">
                         <i class="fa fa-plus fa-fw"></i> Ajouter une recette

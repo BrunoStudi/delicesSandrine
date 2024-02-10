@@ -77,6 +77,15 @@
     background-color: #FECFDF;
     cursor: pointer;
 }
+#btn-retour {
+    background-color: #9E2B40;
+    font-family: "Nature";
+}
+#btn-retour:hover {
+    color: black;
+    background-color: #FECFDF;
+    cursor: pointer;
+}
 
 /* Style des ombres portees du site */
 #shadow {

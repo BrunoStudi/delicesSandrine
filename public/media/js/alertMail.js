@@ -1,4 +1,5 @@
 const form = document.querySelector("form");
+const btnCancel = document.getElementById("btn-retour");
             
 function sendEmail()
 {
@@ -41,3 +42,12 @@ form.addEventListener("submit", (e) =>
     e.preventDefault();
     sendEmail(); 
 });
+
+function goHome () {
+    window.location ="homepage";
+};
+
+/* Lors du clic sur le bouton avec id "btnCancel" */
+btnCancel.onclick = function () {
+    goHome();
+};

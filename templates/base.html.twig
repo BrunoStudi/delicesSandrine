@@ -45,7 +45,7 @@
 
         {# si l'utilisateur est un visiteur #}
         {% if not app.user %}
-            <i class="text-light">
+            <i class="text-light" id="homeText">
                 <span>Bienvenue visiteur !</span>
             </i>
         {% endif %}
@@ -108,7 +108,10 @@
 
     {# Script pour appeler la page contact depuis la page d'acceuil #}
     <script src="/media/js/contact.js"></script>
-    
+
+    {# Script pour linker la page d'acceuil au titre et logo du site #}
+    <script src="/media/js/home.js"></script>
+
     {% endblock %}
 </body>
 </html>

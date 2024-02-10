@@ -6,7 +6,8 @@ function goContact ()
 {
     window.location ="contact";
 }
-       
+   
+/* Lors du clic sur le bouton avec id "btn" */
 btn.onclick = function () {
     goContact(); 
-};
+}
