@@ -1,3 +1,3 @@
 ﻿# Sandrine Coupart - diététicienne
 
-A demo website with users and admin connexion about woman's food for my training.
+A website demo with users and admin connexion about woman's food for my training.
