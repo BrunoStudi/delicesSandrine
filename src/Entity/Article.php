@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ArticleRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 #[ORM\Table(name: '`article`')]
@@ -127,19 +128,41 @@ class Article
         return $this;
     }
 
-    public function getComments(): Collection
-    {
+     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'articles', orphanRemoval: true)]
+     public $comments;
+
+     public function __construct()
+     {
+        $this->comments = new ArrayCollection();
+     }
+
+     /**
+      * @return Collection|Comment[]
+      */
+
+      public function getComments(): Collection
+      {
         return $this->comments;
-    }
+      }
 
-    public function setComment(Comment $comment): self
-    {
-        if(!$this->comments->contains($comment))
-        {
+      public function addComment(Comment $comment): self
+      {
+        if (!$this->comments->contains($comment)) {
             $this->comments[] = $comment;
-            $comment->setPost($this);
+            $comment->setArticle($this);
         }
-        return $this;
-    }
 
+        return $this;
+      }
+
+      public function removeComment(Comment $comment): self
+      {
+        if ($this->comments->removeElement($comment)) {
+            if ($comment->getArticle() === $this) {
+                $comment->setArticle(null);
+            }
+        }
+
+        return $this;
+      }
 }
