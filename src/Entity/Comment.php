@@ -28,6 +28,10 @@ class Comment
     #[ORM\JoinColumn(nullable: false)]
     private ?User $Author = null;
 
+    #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Article $article = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -88,16 +92,12 @@ class Comment
         return $this;
     }
 
-
-    #[ORM\ManyToOne(targetEntity: Article::class, inversedBy: 'comments')]
-    private $article;
-
     public function getArticle(): ?Article
     {
         return $this->article;
     }
 
-    public function setArticle(?Article $article): self
+    public function setArticle(?Article $article): static
     {
         $this->article = $article;
 

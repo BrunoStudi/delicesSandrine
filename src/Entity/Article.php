@@ -6,6 +6,7 @@ use App\Repository\ArticleRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 #[ORM\Table(name: '`article`')]
@@ -37,6 +38,10 @@ class Article
 
     #[ORM\Column(length: 255)]
     private ?string $dietFood = null;
+
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'articles', orphanRemoval: true)]
+    #[ORM\JoinColumn(nullable: false)]
+    private Collection $comments;
     
 
     public function getId(): ?int
@@ -127,9 +132,6 @@ class Article
 
         return $this;
     }
-
-     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'articles', orphanRemoval: true)]
-     public $comments;
 
      public function __construct()
      {

@@ -42,7 +42,7 @@
                                 <p class="px-3 h6" id="textStyle">{{ article.content|nl2br }}</p></br>
                             </div>
                             <h4> Commentaires </h4>
-                            {#{% if article.comments is not empty %}
+                            {% if article.comments is not empty %}
                             <ul>
                                 {% for commentaire in article.comments %}
                                     <li>{{ commentaire.contenu }}
@@ -55,7 +55,7 @@
                             <form action="{{ path('comm_add') }}" method="post">
                                 <textarea name="contenu"></textarea>
                                 <button type="submit">Ajouter</button>
-                            </form>#}
+                            </form>
                         </div>
                     {% endif %}
                     {% if (article.dietFood == "Sans sel") %}
