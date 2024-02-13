@@ -13,13 +13,13 @@ use App\Entity\Article;
 class CommentController extends AbstractController
 {
     //#[Route('/recette/{articleId}/commentaire/ajout', name: 'commentaire_ajout', methods: 'POST')]
-    public function ajout(PersistenceManagerRegistry $doctrine, Request $request/*, Article $article*/): Response
+    public function ajout(PersistenceManagerRegistry $doctrine, Request $request, Article $article): Response
     {
         $contenu = $request->request->get('contenu');
 
         $commentaire = new Comment();
         $commentaire->setContent($contenu);
-        //$commentaire->setArticle($article);
+        $commentaire->setArticle($article);
 
         $em = $doctrine->getManager();
         $this->saveComment($doctrine, $commentaire);

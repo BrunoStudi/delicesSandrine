@@ -44,8 +44,8 @@
                             <h4> Commentaires </h4>
                             {% if article.comments is not empty %}
                             <ul>
-                                {% for commentaire in article.comments %}
-                                    <li>{{ commentaire.contenu }}
+                                {% for comments in article.comments %}
+                                    <li>{{ comments.content }}
                                 {% endfor %}
                             </ul>
                             {% else %}

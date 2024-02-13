@@ -39,11 +39,15 @@ class Article
     #[ORM\Column(length: 255)]
     private ?string $dietFood = null;
 
-    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'articles', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'article', orphanRemoval: true)]
     #[ORM\JoinColumn(nullable: false)]
     private Collection $comments;
-    
 
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -133,13 +137,8 @@ class Article
         return $this;
     }
 
-     public function __construct()
-     {
-        $this->comments = new ArrayCollection();
-     }
-
      /**
-      * @return Collection|Comment[]
+      * @return Collection<int, Comment>
       */
 
       public function getComments(): Collection
@@ -147,17 +146,17 @@ class Article
         return $this->comments;
       }
 
-      public function addComment(Comment $comment): self
+      public function addComment(Comment $comment): static
       {
         if (!$this->comments->contains($comment)) {
-            $this->comments[] = $comment;
+            $this->comments->add($comment);
             $comment->setArticle($this);
         }
 
         return $this;
       }
 
-      public function removeComment(Comment $comment): self
+      public function removeComment(Comment $comment): static
       {
         if ($this->comments->removeElement($comment)) {
             if ($comment->getArticle() === $this) {
