@@ -28,7 +28,7 @@ class Comment
     #[ORM\JoinColumn(nullable: false)]
     private ?User $Author = null;
 
-    #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[ORM\ManyToOne(targetEntity: Article::class, inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Article $article = null;
 

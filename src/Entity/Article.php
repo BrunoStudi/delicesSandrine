@@ -20,7 +20,7 @@ class Article
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
@@ -138,7 +138,7 @@ class Article
     }
 
      /**
-      * @return Collection<int, Comment>
+      * @return Collection|Comment[]>
       */
 
       public function getComments(): Collection
@@ -149,7 +149,7 @@ class Article
       public function addComment(Comment $comment): static
       {
         if (!$this->comments->contains($comment)) {
-            $this->comments->add($comment);
+            $this->comments[] = $comment;
             $comment->setArticle($this);
         }
 
@@ -166,4 +166,5 @@ class Article
 
         return $this;
       }
+
 }

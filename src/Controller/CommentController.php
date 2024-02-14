@@ -17,37 +17,39 @@ class CommentController extends AbstractController
     {
         $contenu = $request->request->get('contenu');
 
-        $commentaire = new Comment();
-        $commentaire->setContent($contenu);
-        $commentaire->setArticle($article);
+        $comments = new Comment();
+        $comments->setContent($contenu);
+        $comments->setArticle($article);
 
         $em = $doctrine->getManager();
-        $this->saveComment($doctrine, $commentaire);
+        $this->saveComment($doctrine, $comments, $article);
 
         return $this->redirectToRoute('article_show', ['id' => $article->getId()]);
     }
 
-    private function completeCommentBeforeSave(Comment $commentaire) {
-        if($commentaire->getPublishedAt()){
-            $commentaire->getPublishedAt(new \DateTime());
+    private function completeCommentBeforeSave(Comment $comments) {
+        if($comments->getPublishedAt()){
+            $comments->getPublishedAt(new \DateTime());
+            $comments->setPublishedAt(new \DateTime());
         }
-        $commentaire->setAuthor($this->getUser());
-        $commentaire->setPublishedAt(new \DateTime());
+        $comments->setAuthor($this->getUser());
+        $comments->setPublishedAt(new \DateTime());
     
-        return $commentaire;
+        return $comments;
     }
 
     /**
      * Enregistrer un commentaire en base de données
      * 
-     * @param   Comment     $commentaire
+     * @param   Comment     $comments
      */
-    private function saveComment(PersistenceManagerRegistry $doctrine, Comment $commentaire)
+    private function saveComment(PersistenceManagerRegistry $doctrine, Comment $comments, Article $article)
     {
-        $commentaire = $this->completeCommentBeforeSave($commentaire);
+        $comments = $this->completeCommentBeforeSave($comments);
 
         $em = $doctrine->getManager();
-        $em->persist($commentaire);
+        $em->persist($article); // Persister l'entité Article
+        $em->persist($comments);
         $em->flush();
     }
 }

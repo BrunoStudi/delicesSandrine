@@ -43,9 +43,9 @@
                             </div>
                             <h4> Commentaires </h4>
                             {% if article.comments is not empty %}
-                            <ul>
+                            <ul style="list-style: none">
                                 {% for comments in article.comments %}
-                                    <li>{{ comments.content }}
+                                    <li>{{ comments.content }}</li>
                                 {% endfor %}
                             </ul>
                             {% else %}
@@ -53,8 +53,8 @@
                             {% endif %}
                             <h5> Ajouter un commentaire </h5>
                             <form action="{{ path('comm_add') }}" method="post">
-                                <textarea name="contenu"></textarea>
-                                <button type="submit">Ajouter</button>
+                                <textarea name="contenu"></textarea></br>
+                                <button class="rounded btn btn-sm btn-warning mb-2" type="submit">Ajouter</button>
                             </form>
                         </div>
                     {% endif %}
