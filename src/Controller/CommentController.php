@@ -15,11 +15,11 @@ class CommentController extends AbstractController
     //#[Route('/recette/{articleId}/commentaire/ajout', name: 'commentaire_ajout', methods: 'POST')]
     public function ajout(PersistenceManagerRegistry $doctrine, Request $request): Response
     {
-        $articleId = $request->request->get('article_id');
-        $contenu = $request->request->get('contenu');
+        $articleId = $request->request->get('article_id'); // Récupérer article_id depuis la page html.
+        $contenu = $request->request->get('contenu'); // idem pour la zone text-area.
         $em = $doctrine->getManager();
 
-        // Récupérer l'article correspondant à partir de son ID
+        // Récupérer l'article correspondant à partir de son ID en BDD
         $article = $em->getRepository(Article::class)->find($articleId);
 
         //Vérifier si l'article existe en BDD.
@@ -28,8 +28,8 @@ class CommentController extends AbstractController
         }
 
         $comments = new Comment();
-        $comments->setContent($contenu);
-        $comments->setArticle($article);
+        $comments->setContent($contenu); // Associer le contenu récupéré au dessus dans la variable comments.
+        $comments->setArticle($article); // Associer comments à l'article correspondant via son ID.
 
         $this->saveComment($doctrine, $comments);
 
@@ -38,9 +38,10 @@ class CommentController extends AbstractController
 
     private function completeCommentBeforeSave(Comment $comments) {
         if($comments->getPublishedAt()){
-            $comments->setPublishedAt(new \DateTime());
+            $comments->getPublishedAt(new \DateTime());
         }
-        $comments->setAuthor($this->getUser());
+        $comments->setAuthor($this->getUser()); // Ajouter l'autheur du commentaire.
+        $comments->setPublishedAt(new \DateTime()); // Ajouter la date de publication du commentaire.
     
         return $comments;
     }
@@ -55,7 +56,7 @@ class CommentController extends AbstractController
         $comments = $this->completeCommentBeforeSave($comments);
 
         $em = $doctrine->getManager();
-        $em->persist($comments);
-        $em->flush();
+        $em->persist($comments); // sauvegarder les modifications.
+        $em->flush(); // et enregistrer en BDD.
     }
 }
