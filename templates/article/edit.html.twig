@@ -22,7 +22,7 @@
         {% if mode == 'update' %}
         <div class="panel-heading pl-3 pt-2">
             <h4 class="panel-title" id="contact-panel-title">
-                <a data-group data-toggle="collapse" href="#info"><i class="fa fa-angle-double-down fa-fw">
+                <a data-group data-toggle="collapse" href="#info"><i class="fa fa-angle-double-down">
                 </i> Informations générales</a>
             </h4></br>
         </div>
@@ -54,12 +54,16 @@
         {% if mode == 'update' %}
         <div class="panel-heading" >
             <h4 class="panel-title pl-3">
+<<<<<<< HEAD
                 <a data-group data-toggle="collapse" href="#info-compl"><i class="fa fa-plus fa-fw"></i> Informations de publications</a>
+=======
+                <a data-group data-toggle="collapse" href="#info-compl"><i class="fa fa-plus"></i> Informations de publications</a>
+>>>>>>> main
             </h4>
         </div>
         
         <div id="info-compl" class="panel-collapse table-responsive">
-            <table class="table table-condensed fiche text-center">
+            <table class="table table-condensed fiche">
                 <tbody>
                     <tr>
                         <td>Publication</td>
@@ -76,16 +80,20 @@
         <div class="row">
             {% if not form.vars.valid %}
             <div class="col-md-8 error">
+<<<<<<< HEAD
                 <i class="fa fa-exclamation-triangle fa-fw"></i>
+=======
+                <i class="fa fa-exclamation-triangle">
+>>>>>>> main
                 Le formulaire contient des erreurs. Vérifiez les différentes rubriques.
             </div>
             {% else %}
                 <div class="col-md-8"></div>
             {% endif %} 
-            <div class="col-md-4 pr-5">
-                {{ form_widget(form.submit, { 'attr': {'class': 'btn btn-info float-right'} }) }}
+            <div class="col-md-4">
+                {{ form_widget(form.submit, { 'attr': {'class': 'btn btn-info float-right mr-5'} }) }}
             </div>
-            {{ form_widget(form, {'attr': {'class': 'float-left pl-5'} }) }}
+            {{ form_widget(form, {'attr': {'class': 'pl-5'} }) }}
             {{ form_end(form) }}
         </div>
     </div>
