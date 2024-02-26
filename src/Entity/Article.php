@@ -22,6 +22,18 @@ class Article
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
+    
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $details = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $temps = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $ingredients = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $preparation = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $publishedAt = null;
@@ -73,6 +85,54 @@ class Article
     public function setContent(?string $content): static
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getDetails(): ?string
+    {
+        return $this->details;
+    }
+
+    public function setDetails(?string $details): static
+    {
+        $this->content = $details;
+
+        return $this;
+    }
+
+    public function getTemps(): ?string
+    {
+        return $this->temps;
+    }
+
+    public function setTemps(?string $temps): static
+    {
+        $this->content = $temps;
+
+        return $this;
+    }
+
+    public function getIngredients(): ?string
+    {
+        return $this->ingredients;
+    }
+
+    public function setIngredients(?string $ingredients): static
+    {
+        $this->content = $ingredients;
+
+        return $this;
+    }
+
+    public function getPreparation(): ?string
+    {
+        return $this->preparation;
+    }
+
+    public function setPreparation(?string $preparation): static
+    {
+        $this->content = $preparation;
 
         return $this;
     }
