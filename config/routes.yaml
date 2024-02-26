@@ -38,3 +38,7 @@ contact:
     path: /contact
     controller: App\Controller\HomeController::contact
         
+comm_add:
+    path: /addCom
+    controller: App\Controller\CommentController::ajout
+
