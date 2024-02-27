@@ -19,9 +19,6 @@ class Article
 
     #[ORM\Column(length: 255)]
     private ?string $title = null;
-
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $content = null;
     
     #[ORM\Column(type: Types::TEXT)]
     private ?string $details = null;
@@ -77,18 +74,6 @@ class Article
         return $this;
     }
 
-    public function getContent(): ?string
-    {
-        return $this->content;
-    }
-
-    public function setContent(?string $content): static
-    {
-        $this->content = $content;
-
-        return $this;
-    }
-
     public function getDetails(): ?string
     {
         return $this->details;
@@ -96,7 +81,7 @@ class Article
 
     public function setDetails(?string $details): static
     {
-        $this->content = $details;
+        $this->details = $details;
 
         return $this;
     }
@@ -108,7 +93,7 @@ class Article
 
     public function setTemps(?string $temps): static
     {
-        $this->content = $temps;
+        $this->temps = $temps;
 
         return $this;
     }
@@ -120,7 +105,7 @@ class Article
 
     public function setIngredients(?string $ingredients): static
     {
-        $this->content = $ingredients;
+        $this->ingredients = $ingredients;
 
         return $this;
     }
@@ -132,7 +117,7 @@ class Article
 
     public function setPreparation(?string $preparation): static
     {
-        $this->content = $preparation;
+        $this->preparation = $preparation;
 
         return $this;
     }

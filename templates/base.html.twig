@@ -23,7 +23,7 @@
 
 <body>
         <div id="navBackground">
-            <img src={{asset('media/logo.jpg')}} alt="image plats légumes" class="rounded ml-3 my-3" id="imgLogo">
+            <img src={{asset('media/logo.jpg')}} alt="image plats de légumes" class="rounded ml-3 my-3" id="imgLogo">
             <i class="ml-5" id="titreText">Sandrine Coupart</i>
         </div>
         
@@ -33,9 +33,15 @@
         {# si l'utilisateur est connecté #}
         {% if app.user %}
             <i class="text-light" id="homeText">
-                <span>Bienvenue {% if is_granted('ROLE_ADMIN') %}Administrateur
-                {% else %}{{ app.user.username }}{% endif %} !</span>
+                <span>Bienvenue 
+                    {% if is_granted('ROLE_ADMIN') %}
+                        Administrateur
+                    {% else %}
+                        {{ app.user.username }}
+                    {% endif %} !
+                </span>
             </i>
+
             {% if (not is_granted("ROLE_ADMIN")) %}
                 <i class="text-light" id="homeText">
                     <span>&nbsp Votre régime: {{ app.user.diet }}.</span>
@@ -53,7 +59,7 @@
             {# Menu bouton pour responsive #}
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobileMenu" 
             aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse collapse" id="mobileMenu">
                 <ul class="navbar-nav ml-auto">
@@ -70,22 +76,34 @@
                     {% if is_granted('ROLE_ADMIN')%}
                         <li class="nav-item {{ app.request.get('_route') == 'app_gusers' ? 'active' : '' }}">
                             <a class="nav-link" href="{{ path('app_gusers') }}">
-                            <span class="fas fa-user-friends"></span> Gestion des utilisateurs</a>
+                                <span class="fas fa-user-friends"></span> 
+                                Gestion des utilisateurs
+                            </a>
                         </li>
                     {% endif %}
 
                     {% if app.user %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_logout') }}"><span class="fas fa-sign-out-alt"></span> Déconnexion</a>
+                        <a class="nav-link" href="{{ path('app_logout') }}">
+                            <span class="fas fa-sign-out-alt"></span> 
+                            Déconnexion
+                        </a>
                     </li>
                     {% else %}
                     <li class="nav-item {{ app.request.get('_route') == 'app_login' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ path('app_login') }}"><span class="fas fa-user"></span> Connexion</a>
+                        <a class="nav-link" href="{{ path('app_login') }}">
+                            <span class="fas fa-user"></span> 
+                            Connexion
+                        </a>
                     </li>
                     <li class="nav-item {{ app.request.get('_route') == 'app_register' ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ path('app_register') }}"><span class="fas fa-sign-in-alt"></span> Inscription</a>
+                        <a class="nav-link" href="{{ path('app_register') }}">
+                            <span class="fas fa-sign-in-alt"></span> 
+                            Inscription
+                        </a>
                     </li>
                     {% endif %}
+                    
                 </ul>
             </div>
         </nav>

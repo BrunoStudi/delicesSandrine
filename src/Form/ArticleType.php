@@ -56,10 +56,29 @@ class ArticleType extends AbstractType
                 ],
         ]);
 
-        // Contenu
-        $builder->add('content', TextareaType::class, [
-            'label' => 'Contenu du plat:'
+        // Description
+        $builder->add('details', TextareaType::class, [
+            'label' => 'Description de la recette:'
         ]);
+
+        // Temps
+        $builder->add('temps', TextareaType::class, [
+            'label' => 'Temps de préparation:',
+            'required' => true
+        ]);
+
+        // Ingrédients
+        $builder->add('ingredients', TextareaType::class, [
+            'label' => 'Ingrédients:',
+            'required' => true
+        ]);
+
+        // Préparation
+        $builder->add('preparation', TextareaType::class, [
+            'label' => 'Préparation:',
+            'required' => true
+        ]);
+
 
         // choix du régime en récupérant les valeurs dans l'entity Diet (qui contient les regimes).
         $builder->add('dietFood', EntityType::class, [
