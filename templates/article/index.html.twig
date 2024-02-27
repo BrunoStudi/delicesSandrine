@@ -46,7 +46,7 @@
 
                             {# si le contenu de la table details de la recette en cours n'est pas vide on fait une action #}
                             {% if article.details is not empty %}
-                                <p class="px-3 h6 rounded border border-success bg-light col-10 col-md-8 mx-auto" id="textStyle">{{ article.details|nl2br }}</p></br>
+                                <p class="px-3 h6 rounded border border-success bg-light col-10 col-md-8 mx-auto py-3" id="textStyle">{{ article.details|nl2br }}</p></br>
                                 {% else %}
                                 {# sinon, ici du vide #}
                             {% endif %}
@@ -55,10 +55,10 @@
                             <span class="far fa-eye"></span> Détails</button>
 
                             {# Contenu principal #}
-                            <div id="{{ article.id }}" class="collapse rounded border border-success bg-light col-10 col-md-8 mx-auto">
-                                <p class="px-3 h6" id="textStyle">{{ article.temps|nl2br }}</p></br>
-                                <p class="px-3 h6" id="textStyle">{{ article.ingredients|nl2br }}</p></br>
-                                <p class="px-3 h6" id="textStyle">{{ article.preparation|nl2br }}</p></br>
+                            <div id="{{ article.id }}" class="collapse rounded border border-success bg-light col-10 col-md-8 pt-2 mx-auto">
+                                <p class="px-3 h6" id="textStyle"><span class="fas fa-history"></span> {{ article.temps|nl2br }}</p></br>
+                                <p class="px-3 h6 border-top border-success pt-2" id="textStyle">Ingrédients :</br></br> {{ article.ingredients|nl2br }}</p></br>
+                                <p class="px-3 h6 border-top border-success pt-2" id="textStyle">Préparation de la recette :</br></br>{{ article.preparation|nl2br }}</p></br>
                             </div>
 
                             {# Section des commentaires #}

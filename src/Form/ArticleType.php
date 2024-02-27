@@ -50,6 +50,7 @@ class ArticleType extends AbstractType
                             'image/jpg',
                             'image/jpeg',
                             'image/png',
+                            'image/webp'
                         ],
                         'mimeTypesMessage' => 'Téléversez une image valide',
                     ])
