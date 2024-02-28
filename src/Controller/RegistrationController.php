@@ -27,7 +27,9 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-           $user->setUsername($form->get('username')->getData());
+
+            //$user->setRoles('ROLE_UTILISATEUR');
+            $user->setUsername($form->get('username')->getData());
            
             // hasher le mot de pass.
             $user->setPassword(

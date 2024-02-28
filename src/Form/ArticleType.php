@@ -8,6 +8,7 @@ use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -59,25 +60,54 @@ class ArticleType extends AbstractType
 
         // Description
         $builder->add('details', TextareaType::class, [
-            'label' => 'Description de la recette:'
+            'label' => 'Description de la recette:',
+            'required' => false
         ]);
 
-        // Temps
-        $builder->add('temps', TextareaType::class, [
-            'label' => 'Temps de préparation:',
-            'required' => true
+        // Temps préparation
+        $builder->add('tempsprepa', IntegerType::class, [
+            'label' => 'Temps de préparation (mn):',
+            'constraints' => [
+                new NotBlank([
+                    'message' => 'Ce champ ne peut être vide'
+                ])
+            ]
+        ]);
+
+        // Temps de cuisson
+        $builder->add('tempscuisson', IntegerType::class, [
+            'label' => 'Temps de cuisson (mn):',
+            'constraints' => [
+                new NotBlank([
+                    'message' => 'Ce champ ne peut être vide'
+                ])
+            ]
+        ]);
+
+        // Temps de repos
+        $builder->add('tempsrepos', IntegerType::class, [
+            'label' => 'Temps de repos (mn):',
+            'required' => false
         ]);
 
         // Ingrédients
         $builder->add('ingredients', TextareaType::class, [
             'label' => 'Ingrédients:',
-            'required' => true
+            'constraints' => [
+                new NotBlank([
+                    'message' => 'Ce champ ne peut être vide'
+                ])
+            ]
         ]);
 
         // Préparation
         $builder->add('preparation', TextareaType::class, [
             'label' => 'Préparation:',
-            'required' => true
+            'constraints' => [
+                new NotBlank([
+                    'message' => 'Ce champ ne peut être vide'
+                ])
+            ]
         ]);
 
 

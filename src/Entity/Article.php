@@ -23,8 +23,14 @@ class Article
     #[ORM\Column(type: Types::TEXT)]
     private ?string $details = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $temps = null;
+    #[ORM\Column(type: 'integer')]
+    private ?int $tempsprepa = null;
+
+    #[ORM\Column(type: 'integer')]
+    private ?int $tempscuisson = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $tempsrepos = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $ingredients = null;
@@ -86,14 +92,38 @@ class Article
         return $this;
     }
 
-    public function getTemps(): ?string
+    public function getTempsprepa(): ?int
     {
-        return $this->temps;
+        return $this->tempsprepa;
     }
 
-    public function setTemps(?string $temps): static
+    public function setTempsprepa(?int $tempsprepa): static
     {
-        $this->temps = $temps;
+        $this->tempsprepa = $tempsprepa;
+
+        return $this;
+    }
+
+    public function getTempscuisson(): ?int
+    {
+        return $this->tempscuisson;
+    }
+
+    public function setTempscuisson(?int $tempscuisson): static
+    {
+        $this->tempscuisson = $tempscuisson;
+
+        return $this;
+    }
+
+    public function getTempsrepos(): ?int
+    {
+        return $this->tempsrepos;
+    }
+
+    public function setTempsrepos(?int $tempsrepos): static
+    {
+        $this->tempsrepos = $tempsrepos;
 
         return $this;
     }

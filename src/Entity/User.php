@@ -89,7 +89,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         // distribue le role ROLE_USER automatiquement à la création d'un utilisateur.
-        $roles[] = 'ROLE_USER';
+        $roles[] = 'UTILISATEUR';
 
         return array_unique($roles);
     }
