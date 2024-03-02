@@ -1,6 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edition recette{% endblock %}
+{% block title %}
+    {% if mode == 'new' %}
+        Ajout
+        {% else %}
+        Edition
+    {% endif %}
+    recette
+{% endblock %}
 
 {% block content %}
     {# Titre de la page #}
@@ -12,12 +19,12 @@
                 {% else %}
                     Edition
                 {% endif %} 
-                de  la recette
+                d'une recette
             </h1>
         </div>
     </div>
 
-    <div class="container">
+    <div class="container col-md-6 mt-5">
         {{ form_start(form, {'method': 'POST', 'attr': {'novalidate': 'novalidate' }, 
         'attr': {'class': 'rounded border border-dark bg-light mb-5', 'id': 'shadow' }})}}
 
@@ -26,53 +33,63 @@
         {# ------------------------- #}
 
         {% if mode == 'update' %}
-        <div class="panel-heading pl-3 pt-2">
-            <h4 class="panel-title" id="contact-panel-title">
-                <a data-group data-toggle="collapse" href="#info">
-                    <i class="fa fa-angle-double-down"></i> 
-                    Informations générales
-                </a>
-            </h4></br>
-        </div>
+            <div class="panel-heading pl-3 pt-2">
+                <h4 class="panel-title" id="contact-panel-title">
+                    <a data-group data-toggle="collapse" href="#info">
+                        <i class="fa fa-angle-double-down"></i> 
+                        Informations générales
+                    </a>
+                </h4></br>
+            </div>
         {% endif %}
 
-        <div id="info" class="panel-collapse my-5 ml-5">
-               
-            {{ include('helpers/form/_group.html.twig', {
-                        'field': form['title']
-                    }) }}</br>
+        <div id="info" class="panel-collapse">
 
-            {{ include('helpers/form/_group.html.twig', {
-                        'field': form['details']
-                    }) }}</br>
+            <div class="mb-5 mt-3 col-md-10 mx-auto">
+                    {{ form_label(form.title, 'Nom de la recette :', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.title, {'attr': {'class': 'form-control', 'style': 'border-radius: 10px;', 'value': article.title}}) }}
+            </div>
 
-            {{ include('helpers/form/_group.html.twig', {
-                        'field': form['tempsprepa']
-                    }) }}</br>
+            <div class="mb-5 col-md-10 mx-auto">
+                    {{ form_label(form.details, 'Description de la recette :', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.details, {'attr': {'class': 'form-control', 'style': 'border-radius: 10px;', 'value': article.details}}) }}
+            </div>
 
-            {{ include('helpers/form/_group.html.twig', {
-                        'field': form['tempscuisson']
-                    }) }}</br>
+            <div class="mb-5 col-md-10 mx-auto">
+                    {{ form_label(form.tempsprepa, 'Temps de préparation (en minutes) :', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.tempsprepa, {'attr': {'class': 'form-control', 'style': 'border-radius: 10px;', 'value': article.tempsprepa}}) }}
+            </div>
 
-            {{ include('helpers/form/_group.html.twig', {
-                        'field': form['tempsrepos']
-                    }) }}</br>
+            <div class="mb-5 col-md-10 mx-auto">
+                    {{ form_label(form.tempscuisson, 'Temps de cuisson (en minutes) :', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.tempscuisson, {'attr': {'class': 'form-control', 'style': 'border-radius: 10px;', 'value': article.tempscuisson}}) }}
+            </div>
 
-            {{ include('helpers/form/_group.html.twig', {
-                        'field': form['ingredients']
-                    }) }}</br>
+            <div class="mb-5 col-md-10 mx-auto">
+                    {{ form_label(form.tempsrepos, 'Temps de repos (en minutes) :', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.tempsrepos, {'attr': {'class': 'form-control', 'style': 'border-radius: 10px;', 'value': article.tempsrepos}}) }}
+            </div>
 
-            {{ include('helpers/form/_group.html.twig', {
-                        'field': form['preparation']
-                    }) }}</br>
+            <div class="mb-5 col-md-10 mx-auto">
+                    {{ form_label(form.ingredients, 'Ingrédients de la recette :', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.ingredients, {'attr': {'class': 'form-control', 'style': 'border-radius: 10px;', 'value': article.ingredients}}) }}
+            </div>
 
-            {{ include('helpers/form/_group.html.twig', {
-                        'field': form['dietFood']
-                    }) }}</br> 
+            <div class="mb-5 col-md-10 mx-auto">
+                    {{ form_label(form.preparation, 'Etapes de préparation de la recette :', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.preparation, {'attr': {'class': 'form-control', 'style': 'border-radius: 10px;', 'value': article.preparation}}) }}
+            </div>
+
+            <div class="mb-5 col-md-10 mx-auto">
+                    {{ form_label(form.dietFood, 'Régime de la recette :', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.dietFood, {'attr': {'class': 'form-control', 'style': 'border-radius: 10px;', 'value': article.dietFood}}) }}
+            </div>
+
+            <div class="mb-5 col-md-10 mx-auto">
+                    {{ form_label(form.imagePlat, 'Photo de la recette :', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.imagePlat, {'attr': {'class': 'form-control', 'style': 'border-radius: 10px;', 'value': article.image}}) }}
+            </div>
                     
-            {{ include('helpers/form/_group.html.twig', {
-                        'field': form['imagePlat']
-                    }) }}</br> 
         </div>
 
         {# -------------------------------- #}
@@ -80,49 +97,66 @@
         {# -------------------------------- #}
         
         {% if mode == 'update' %}
-        <div class="panel-heading" >
-            <h4 class="panel-title pl-3">
-                <a data-group data-toggle="collapse" href="#info-compl">
-                    <i class="fa fa-plus fa-fw"></i> 
-                    Informations de publications
-                </a>
-            </h4>
-        </div>
-        
-        <div id="info-compl" class="panel-collapse table-responsive">
-            <table class="table table-condensed fiche">
-                <tbody>
-                    <tr>
-                        <td>Publication</td>
-                        <td>    
-                            Publié le {{ article.publishedAt | date("d-m-Y à H:i:s") }}
-                            {{ article.author?'par ' ~ article.author.username }}
-                        </td>  
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+            <div class="panel-heading" >
+                <h4 class="panel-title pl-3">
+                    <a data-group data-toggle="collapse" href="#info-compl">
+                        <i class="fa fa-plus fa-fw"></i> 
+                        Informations de publications
+                    </a>
+                </h4>
+            </div>
+            
+            <div id="info-compl" class="panel-collapse table-responsive">
+                <table class="table table-condensed fiche my-3">
+                    <tbody>
+                        <tr>
+                            <td class="bg-info">Publié le :</td>
+                            <td>    
+                                {{ article.publishedAt | date("d-m-Y") }}
+                            </td> 
+                        </tr> 
+                        <tr>
+                            <td class="bg-info">à :</td>
+                            <td>
+                                {{ article.publishedAt | date("H:i:s") }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border-bottom bg-info">Par :</td>
+                            <td class="border-bottom">
+                                {{ article.author.username }}
+                            </td>
+                    </tbody>
+                </table>
+            </div>
         {% endif %}
 
         <div class="row">
             {% if not form.vars.valid %}
-            <div class="col-md-8 error">
-                <i class="fa fa-exclamation-triangle fa-fw"></i>
-                Le formulaire contient des erreurs. Vérifiez les différentes rubriques.
-            </div>
-            {% else %}
-                <div class="col-md-8"></div>
+                <div class="col-md-8 error">
+                    <i class="fa fa-exclamation-triangle fa-fw"></i>
+                    Le formulaire contient des erreurs. Vérifiez les différentes rubriques.
+                </div>
+                {% else %}
+                    <div class="col-md-8"></div>
             {% endif %} 
-            <div class="col-md-4">
-                {{ form_widget(form.submit, { 'attr': {'class': 'btn btn-warning float-right mr-5'} }) }}
-            </div>
-            {{ form_widget(form, {'attr': {'class': 'pl-5'} }) }}
-            {{ form_end(form) }}
         </div>
+
+        <div class="col-md-4">
+                {{ form_label(form.isPublished, 'Publier la recette ?', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.isPublished, {'attr': {'class': 'pl-5'} }) }}
+        </div>
+
+        <div class="col-md-12 my-3 text-right">
+            {{ form_widget(form.submit, { 'attr': {'class': 'btn btn-warning'} }) }} 
+        </div>
+        {{ form_end(form) }}
     </div>
+
 {% endblock %}
 
 {% block stylesheets %}
+
     <style>
         .container{
             width: 100%;
@@ -154,4 +188,5 @@
             margin-top: 30px;
         }
     </style>
+
 {% endblock %}

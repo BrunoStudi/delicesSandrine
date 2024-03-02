@@ -3,24 +3,30 @@
 {% block title %}Inscription{% endblock %}
 
 {% block content %}
-    <div class="container center">
-        <h1 class="h3 my-5 pb-5 font-weight-normal text-center border-bottom" id="accroche">Inscription client</h1>
-        {{ form_start(registrationForm, {'attr': {'class': 'col rounded border border-dark bg-light py-5', 'id': 'shadow'}}) }}
-            <div class="text-center input-field col s12 m6 l6 offset-m3 offset-l3 mb-3">
-                {{ form_widget(registrationForm.username, {'attr': {'placeholder': 'Nom d\'utilisateur'}}) }}
+
+    <div class="container">
+        <h1 class="border-bottom text-center my-5 pb-2" id="titreUsers">Inscription</h1>
+        {{ form_start(registrationForm, {'attr': {'class': 'col-md-6 rounded border border-dark bg-light mx-auto', 'id': 'shadow'}}) }}
+
+            <div class="input-field col-md-10 mx-auto mt-5">
+                {{ form_widget(registrationForm.username, {'attr': {'placeholder': 'Nom d\'utilisateur', 'class': 'form-control'}}) }}
                 <span class="error">{{ form_errors(registrationForm.username) }}</span>
             </div>
-            <div class="text-center input-field col s12 m6 l6 offset-m3 offset-l3 mb-3">
-                {{ form_widget(registrationForm.plainPassword, {'attr': {'placeholder': 'Mot de passe'}}) }}
+
+            <div class="input-field col-md-10 mx-auto mt-3">
+                {{ form_widget(registrationForm.plainPassword, {'attr': {'placeholder': 'Mot de passe', 'class': 'form-control'}}) }}
                 <span class="error">{{ form_errors(registrationForm.plainPassword) }}</span>
             </div>
-            <div class="text-center input-field col text-center mt-2 mb-5">
-                {{ form_widget(registrationForm.diet) }}
+
+            <div class="input-field col-md-10 mx-auto mt-3">
+                {{ form_widget(registrationForm.diet, {'attr': {'class': 'form-control'}}) }}
                 <span class="error">{{ form_errors(registrationForm.diet) }}</span>
             </div>
-            <div class="text-center input-field col s12">
-                <input type="submit" name="" class="btn btn-lg btn-warning" value="S'inscrire">
+
+            <div class="input-field col-md-10 mx-auto text-center my-5">
+                <input type="submit" name="" class="form-control btn btn-warning" value="S'inscrire">
             </div>
         {{ form_end(registrationForm) }}
     </div>
+
 {% endblock %}

@@ -124,7 +124,7 @@ class ArticleType extends AbstractType
 
         // Recette publié ou non.
         $builder->add('isPublished', CheckboxType::class, [
-            'label' => 'Publier la recette'
+            'label' => 'Publier la recette',
         ]);
 
         // Bouton Enregistrer.

@@ -1,0 +1,41 @@
+<h3 class="text-center h5 py-3 pl-3 rounded bg-danger">{{ article.title }}</h3>
+<div class="text-center rounded border border-danger" id="shadow" style="background-image: url(./media/back.png); 
+overflow-y: auto">
+    <img class="mx-2 mt-2 mb-4 rounded img-fluid" style="width: 340px" 
+    alt="img" src="./uploads/images/{{ article.image }}"></br>
+
+    {# si le contenu de la table details de la recette en cours n'est pas vide on fait une action #}
+    {% if article.details is not empty %}
+        <p class="px-3 h6 rounded border border-danger bg-light col-10 col-md-8 mx-auto py-3" id="textStyle">{{ article.details|nl2br }}</p></br>
+        {% else %}
+            {# sinon, ici du vide #}
+    {% endif %}
+
+    <button type="button" class="btn btn-success mb-3" data-toggle="collapse" data-target="#{{ article.id }}">
+    <span class="far fa-eye"></span> Détails</button>
+
+    {# Contenu principal #}
+    <div id="{{ article.id }}" class="collapse rounded border border-danger bg-light col-10 col-md-8 pt-2 mx-auto">
+        <p class="px-3 h6" id="textStyle">
+            <a data-toggle="tooltip" data-placement="bottom" title="Temps de préparation">
+                <span class="fas fa-history"></span>
+            </a> {{ article.tempsprepa|nl2br }}mn |
+            <a data-toggle="tooltip" data-placement="bottom" title="Temps de cuisson"> 
+                <span class="fas fa-mug-hot"></span>
+            </a> {{ article.tempscuisson|nl2br }}mn
+                                        
+            {% if article.tempsrepos is not empty %}
+                | <a data-toggle="tooltip" data-placement="bottom" title="Temps de repos">
+                <span class="fas fa-bed"></span></a> {{ article.tempsrepos|nl2br }}mn
+                {% else %}
+                    {# Vide #}
+            {% endif %}
+        </p></br>
+        <p class="px-3 h6 border-top border-danger pt-2" id="textStyle">Ingrédients :</br></br> {{ article.ingredients|nl2br }}</p></br>
+        <p class="px-3 h6 border-top border-danger pt-2" id="textStyle">Préparation de la recette :</br></br>{{ article.preparation|nl2br }}</p></br>
+    </div>
+
+    {# Section des commentaires #}
+    {% include 'comment/comments.html.twig' %}
+
+</div>

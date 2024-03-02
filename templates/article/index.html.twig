@@ -38,372 +38,47 @@
                     {# Couleur de fond differente en fonction du regime,
                     régime végétarien #}
                     {% if (article.dietFood == "Végétarien") %}
-                        <h3 class="text-center h5 py-3 pl-3 rounded bg-success">{{ article.title }}</h3>
-                        <div class="text-center rounded border border-success" id="shadow" style="background-image: url(./media/back.png); 
-                        overflow-y: auto">
-                            <img class="mx-2 mt-2 mb-4 rounded img-fluid" style="width: 340px" 
-                            alt="img" src="./uploads/images/{{ article.image }}"></br>
 
-                            {# si le contenu de la table details de la recette en cours n'est pas vide on fait une action #}
-                            {% if article.details is not empty %}
-                                <p class="px-3 h6 rounded border border-success bg-light col-10 col-md-8 mx-auto py-3" id="textStyle">{{ article.details|nl2br }}</p></br>
-                                {% else %}
-                                {# sinon, ici du vide #}
-                            {% endif %}
-
-                            <button type="button" class="btn btn-success mb-3" data-toggle="collapse" data-target="#{{ article.id }}">
-                            <span class="far fa-eye"></span> Détails</button>
-
-                            {# Contenu principal #}
-                            <div id="{{ article.id }}" class="collapse rounded border border-success bg-light col-10 col-md-8 pt-2 mx-auto">
-                                <p class="px-3 h6" id="textStyle">
-                                    <a data-toggle="tooltip" data-placement="bottom" title="Temps de préparation">
-                                    <span class="fas fa-history"></span></a> {{ article.tempsprepa|nl2br }}mn |
-                                    <a data-toggle="tooltip" data-placement="bottom" title="Temps de cuisson"> 
-                                    <span class="fas fa-mug-hot"></span></a> {{ article.tempscuisson|nl2br }}mn
-                                    {% if article.tempsrepos is not empty %}
-                                         | <a data-toggle="tooltip" data-placement="bottom" title="Temps de repos">
-                                         <span class="fas fa-bed"></span></a> {{ article.tempsrepos|nl2br }}mn
-                                        {% else %}
-                                        {# Vide #}
-                                    {% endif %}
-                                </p></br>
-                                <p class="px-3 h6 border-top border-success pt-2" id="textStyle">Ingrédients :</br></br> {{ article.ingredients|nl2br }}</p></br>
-                                <p class="px-3 h6 border-top border-success pt-2" id="textStyle">Préparation de la recette :</br></br>{{ article.preparation|nl2br }}</p></br>
-                            </div>
-
-                            {# Section des commentaires #}
-                            <h4 class="mt-3"> Commentaires </h4>
-                            {% if article.comments is not empty %}
-                            <section class="my-2">
-                                <button type="button" class="btn btn-success mb-3" data-toggle="collapse" data-target="#comments-{{ article.id }}">
-                                <span class="far fa-comments"></span> Voir les commentaires</button>
-                                <div class="collapse text-left" id="comments-{{ article.id }}">
-                                    {% for comments in article.comments %}
-                                            <p class="rounded border border-success bg-light col-10 col-md-8 mx-auto py-2">
-                                            <span class="badge badge-info">{{ comments.author.username }}:</span> {{ comments.content }}</br></br>
-                                            <span class="badge badge-info">Posté le:</span> {{ comments.publishedAt | date("d-m-Y à H:i:s") }}</p>
-                                    {% endfor %}
-                                </div>
-                            </section>
-                            {% else %}
-                                <p>Aucun commentaires</p>
-                            {% endif %}
-
-                            <h5 class="mt-3"> Ajouter un commentaire </h5>
-                            <form action="{{ path('comm_add') }}" method="post">
-                                <textarea name="contenu"></textarea></br>
-                                <input type="hidden" name="article_id" value="{{ article.id }}"></input>
-                                <button class="rounded btn btn-sm btn-warning mb-2" type="submit">Ajouter</button>
-                            </form>
-                        </div>
+                        {% include 'article/vegetarian.html.twig' %}
+                        
                     {% endif %}
 
                     {# Régime sans sel #}
                     {% if (article.dietFood == "Sans sel") %}
-                        <h3 class="text-center h5 py-3 pl-3 rounded bg-light">{{ article.title }}</h3>
-                        <div class="text-center rounded border border-secondary" id="shadow" style="background-image: url(./media/back.png); 
-                        overflow-y: auto">
-                            <img class="mx-2 mt-2 mb-4 rounded img-fluid" style="width: 340px" 
-                            alt="img" src="./uploads/images/{{ article.image }}"></br>
 
-                            {# si le contenu de la table details de la recette en cours n'est pas vide on fait une action #}
-                            {% if article.details is not empty %}
-                                <p class="px-3 h6 rounded border border-secondary bg-light col-10 col-md-8 mx-auto" id="textStyle">{{ article.details|nl2br }}</p></br>
-                                {% else %}
-                                {# sinon, ici du vide #}
-                            {% endif %}
-
-                            <button type="button" class="btn btn-success mb-3" data-toggle="collapse" data-target="#{{ article.id }}">
-                            <span class="far fa-eye"></span> Détails</button>
-                            <div id="{{ article.id }}" class="collapse rounded border border-secondary bg-light col-10 col-md-8 pt-2 mx-auto">
-                                <p class="px-3 h6" id="textStyle">
-                                    <a data-toggle="tooltip" data-placement="bottom" title="Temps de préparation">
-                                    <span class="fas fa-history"></span></a> {{ article.tempsprepa|nl2br }}mn | 
-                                    <a data-toggle="tooltip" data-placement="bottom" title="Temps de cuisson">
-                                    <span class="fas fa-mug-hot"></span></a> {{ article.tempscuisson|nl2br }}mn
-                                    {% if article.tempsrepos is not empty %}
-                                         | <a data-toggle="tooltip" data-placement="bottom" title="Temps de repos">
-                                        <span class="fas fa-bed"></span></a> {{ article.tempsrepos|nl2br }}mn
-                                        {% else %}
-                                        {# Vide #}
-                                    {% endif %}
-                                </p></br>
-                                <p class="px-3 h6 border-top border-secondary pt-2" id="textStyle">Ingrédients :</br></br> {{ article.ingredients|nl2br }}</p></br>
-                                <p class="px-3 h6 border-top border-secondary pt-2" id="textStyle">Préparation de la recette :</br></br>{{ article.preparation|nl2br }}</p></br>
-                            </div>
-
-                            {# Section des commentaires #}
-                            <h4 class="mt-3"> Commentaires </h4>
-                            {% if article.comments is not empty %}
-                            <section class="my-2">
-                                <button type="button" class="btn btn-success mb-3" data-toggle="collapse" data-target="#comments-{{ article.id }}">
-                                <span class="far fa-comments"></span> Voir les commentaires</button>
-                                <div class="collapse text-left" id="comments-{{ article.id }}">
-                                    {% for comments in article.comments %}
-                                            <p class="rounded border border-secondary bg-light col-10 col-md-8 mx-auto py-2">
-                                            <span class="badge badge-info">{{ comments.author.username }}:</span> {{ comments.content }}</br></br>
-                                            <span class="badge badge-info">Posté le:</span> {{ comments.publishedAt | date("d-m-Y à H:i:s") }}</p>
-                                    {% endfor %}
-                                </div>
-                            </section>
-                            {% else %}
-                                <p>Aucun commentaires</p>
-                            {% endif %}
-
-                            <h5 class="mt-3"> Ajouter un commentaire </h5>
-                            <form action="{{ path('comm_add') }}" method="post">
-                                <textarea name="contenu"></textarea></br>
-                                <input type="hidden" name="article_id" value="{{ article.id }}"></input>
-                                <button class="rounded btn btn-sm btn-warning mb-2" type="submit">Ajouter</button>
-                            </form>
-                        </div>
+                        {% include 'article/withoutsalt.html.twig' %}
+                        
                     {% endif %}
 
                     {# Régime sans lactose #}
                     {% if (article.dietFood == "Sans lactose") %}
-                        <h3 class="text-center h5 py-3 pl-3 rounded bg-info">{{ article.title }}</h3>
-                        <div class="text-center rounded border border-info"  id="shadow" style="background-image: url(./media/back.png); 
-                        overflow-y: auto">
-                        <img class="mx-2 mt-2 mb-4 rounded img-fluid" style="width: 340px" 
-                        alt="img" src="./uploads/images/{{ article.image }}"></br>
 
-                        {# si le contenu de la table details de la recette en cours n'est pas vide on fait une action #}
-                        {% if article.details is not empty %}
-                            <p class="px-3 h6 rounded border border-info bg-light col-10 col-md-8 mx-auto" id="textStyle">{{ article.details|nl2br }}</p></br>
-                            {% else %}
-                            {# sinon, ici du vide #}
-                        {% endif %}
-                        
-                        <button type="button" class="btn btn-success mb-3" data-toggle="collapse" data-target="#{{ article.id }}">
-                            <span class="far fa-eye"></span> Détails</button>
-                            <div id="{{ article.id }}" class="collapse rounded border border-sinfo bg-light col-10 col-md-8 pt-2 mx-auto">
-                                <p class="px-3 h6" id="textStyle">
-                                    <a data-toggle="tooltip" data-placement="bottom" title="Temps de préparation">
-                                    <span class="fas fa-history"></span></a> {{ article.tempsprepa|nl2br }}mn | 
-                                    <a data-toggle="tooltip" data-placement="bottom" title="Temps de cuisson">
-                                    <span class="fas fa-mug-hot"></span></a> {{ article.tempscuisson|nl2br }}mn
-                                    {% if article.tempsrepos is not empty %}
-                                         | <a data-toggle="tooltip" data-placement="bottom" title="Temps de repos">
-                                        <span class="fas fa-bed"></span></a> {{ article.tempsrepos|nl2br }}mn
-                                        {% else %}
-                                        {# Vide #}
-                                    {% endif %}
-                                </p></br>
-                                <p class="px-3 h6 border-top border-info pt-2" id="textStyle">Ingrédients :</br></br> {{ article.ingredients|nl2br }}</p></br>
-                                <p class="px-3 h6 border-top border-info pt-2" id="textStyle">Préparation de la recette :</br></br>{{ article.preparation|nl2br }}</p></br>
-                            </div>
+                        {% include 'article/lactosefree.html.twig' %}
 
-                            {# Section des commentaires #}
-                            <h4 class="mt-3"> Commentaires </h4>
-                            {% if article.comments is not empty %}
-                            <section class="my-2">
-                                <button type="button" class="btn btn-success mb-3" data-toggle="collapse" data-target="#comments-{{ article.id }}">
-                                <span class="far fa-comments"></span> Voir les commentaires</button>
-                                <div class="collapse text-left" id="comments-{{ article.id }}">
-                                    {% for comments in article.comments %}
-                                            <p class="rounded border border-info bg-light col-10 col-md-8 mx-auto py-2">
-                                            <span class="badge badge-info">{{ comments.author.username }}:</span> {{ comments.content }}</br></br>
-                                            <span class="badge badge-info">Posté le:</span> {{ comments.publishedAt | date("d-m-Y à H:i:s") }}</p>
-                                    {% endfor %}
-                                </div>
-                            </section>
-                            {% else %}
-                                <p>Aucun commentaires</p>
-                            {% endif %}
-
-                            <h5 class="mt-3"> Ajouter un commentaire </h5>
-                            <form action="{{ path('comm_add') }}" method="post">
-                                <textarea name="contenu"></textarea></br>
-                                <input type="hidden" name="article_id" value="{{ article.id }}"></input>
-                                <button class="rounded btn btn-sm btn-warning mb-2" type="submit">Ajouter</button>
-                            </form>
-                        </div>
                     {% endif %}
 
                     {# Régime sans gluten #}
                     {% if (article.dietFood == "Sans gluten") %}
-                        <h3 class="text-center h5 py-3 pl-3 rounded bg-secondary">{{ article.title }}</h3>
-                        <div class="text-center rounded border border-secondary"  id="shadow" style="background-image: url(./media/back.png); 
-                        overflow-y: auto">
-                        <img class="mx-2 mt-2 mb-4 rounded img-fluid" style="width: 340px" 
-                        alt="img" src="./uploads/images/{{ article.image }}"></br>
-                        
-                        {# si le contenu de la table details de la recette en cours n'est pas vide on fait une action #}
-                        {% if article.details is not empty %}
-                            <p class="px-3 h6 rounded border border-secondary bg-light col-10 col-md-8 mx-auto" id="textStyle">{{ article.details|nl2br }}</p></br>
-                            {% else %}
-                            {# sinon, ici du vide #}
-                        {% endif %}
 
-                        <button type="button" class="btn btn-success mb-3" data-toggle="collapse" data-target="#{{ article.id }}">
-                            <span class="far fa-eye"></span> Voir la recette</button>
-                            <div id="{{ article.id }}" class="collapse rounded border border-secondary bg-light col-10 col-md-8 pt-2 mx-auto">
-                                    <p class="px-3 h6" id="textStyle">
-                                        <a data-toggle="tooltip" data-placement="bottom" title="Temps de préparation">
-                                        <span class="fas fa-history"></span></a> {{ article.tempsprepa|nl2br }}mn | 
-                                        <a data-toggle="tooltip" data-placement="bottom" title="Temps de cuison">
-                                        <span class="fas fa-mug-hot"></span></a> {{ article.tempscuisson|nl2br }}mn
-                                        {% if article.tempsrepos is not empty %}
-                                            | <a data-toggle="tooltip" data-placement="bottom" title="Temps de repos">
-                                            <span class="fas fa-bed"></span></a> {{ article.tempsrepos|nl2br }}mn
-                                            {% else %}
-                                            {# Vide #}
-                                        {% endif %}
-                                    </p></br>
-                                    <p class="px-3 h6 border-top border-secondary pt-2" id="textStyle">Ingrédients :</br></br> {{ article.ingredients|nl2br }}</p></br>
-                                    <p class="px-3 h6 border-top border-secondary pt-2" id="textStyle">Préparation de la recette :</br></br>{{ article.preparation|nl2br }}</p></br>
-                                </div>
+                        {% include 'article/glutenfree.html.twig' %}
 
-                            {# Section des commentaires #}
-                            <h4 class="mt-3"> Commentaires </h4>
-                            {% if article.comments is not empty %}
-                            <section class="my-2">
-                                <button type="button" class="btn btn-success mb-3" data-toggle="collapse" data-target="#comments-{{ article.id }}">
-                                <span class="far fa-comments"></span> Voir les commentaires</button>
-                                <div class="collapse text-left" id="comments-{{ article.id }}">
-                                    {% for comments in article.comments %}
-                                            <p class="rounded border border-secondary bg-light col-10 col-md-8 mx-auto py-2">
-                                            <span class="badge badge-info">{{ comments.author.username }}:</span> {{ comments.content }}</br></br>
-                                            <span class="badge badge-info">Posté le:</span> {{ comments.publishedAt | date("d-m-Y à H:i:s") }}</p>
-                                    {% endfor %}
-                                </div>
-                            </section>
-                            {% else %}
-                                <p>Aucun commentaires</p>
-                            {% endif %}
-
-                            <h5 class="mt-3"> Ajouter un commentaire </h5>
-                            <form action="{{ path('comm_add') }}" method="post">
-                                <textarea name="contenu"></textarea></br>
-                                <input type="hidden" name="article_id" value="{{ article.id }}"></input>
-                                <button class="rounded btn btn-sm btn-warning mb-2" type="submit">Ajouter</button>
-                            </form>
-                        </div>
                     {% endif %}
 
                     {# Régime sportif #}
                     {% if (article.dietFood == "Hyperprotéiné (Sportifs)") %}
-                        <h3 class="text-center h5 py-3 pl-3 rounded bg-warning">{{ article.title }}</h3>
-                        <div class="text-center rounded border border-warning"  id="shadow" style="background-image: url(./media/back.png); 
-                        overflow-y: auto">
-                        <img class="mx-2 mt-2 mb-4 rounded img-fluid" style="width: 340px" 
-                        alt="img" src="./uploads/images/{{ article.image }}"></br>
-                        
-                        {# si le contenu de la table details de la recette en cours n'est pas vide on fait une action #}
-                        {% if article.details is not empty %}
-                            <p class="px-3 h6 rounded border border-warning bg-light col-10 col-md-8 mx-auto" id="textStyle">{{ article.details|nl2br }}</p></br>
-                            {% else %}
-                            {# sinon, ici du vide #}
-                        {% endif %}
 
-                        <button type="button" class="btn btn-success mb-3" data-toggle="collapse" data-target="#{{ article.id }}">
-                            <span class="far fa-eye"></span> Voir la recette</button>
-                            <div id="{{ article.id }}" class="collapse rounded border border-warning bg-light col-10 col-md-8 pt-2 mx-auto">
-                                <p class="px-3 h6" id="textStyle">
-                                    <a data-toggle="tooltip" data-placement="bottom" title="Temps de préparation">
-                                    <span class="fas fa-history"></span></a> {{ article.tempsprepa|nl2br }}mn | 
-                                    <a data-toggle="tooltip" data-placement="bottom" title="Temps de cuisson">
-                                    <span class="fas fa-mug-hot"></span></a> {{ article.tempscuisson|nl2br }}mn
-                                    {% if article.tempsrepos is not empty %}
-                                         | <a data-toggle="tooltip" data-placement="bottom" title="Temps de repos">
-                                        <span class="fas fa-bed"></span></a> {{ article.tempsrepos|nl2br }}mn
-                                        {% else %}
-                                        {# Vide #}
-                                    {% endif %}
-                                </p></br>
-                                <p class="px-3 h6 border-top border-warning pt-2" id="textStyle">Ingrédients :</br></br> {{ article.ingredients|nl2br }}</p></br>
-                                <p class="px-3 h6 border-top border-warning pt-2" id="textStyle">Préparation de la recette :</br></br>{{ article.preparation|nl2br }}</p></br>
-                            </div>
+                        {% include 'article/sportsdiet.html.twig' %}
 
-                            {# Section des commentaires #}
-                            <h4 class="mt-3"> Commentaires </h4>
-                            {% if article.comments is not empty %}
-                            <section class="my-2">
-                                <button type="button" class="btn btn-success mb-3" data-toggle="collapse" data-target="#comments-{{ article.id }}">
-                                <span class="far fa-comments"></span> Voir les commentaires</button>
-                                <div class="collapse text-left" id="comments-{{ article.id }}">
-                                    {% for comments in article.comments %}
-                                            <p class="rounded border border-warning bg-light col-10 col-md-8 mx-auto py-2">
-                                            <span class="badge badge-info">{{ comments.author.username }}:</span> {{ comments.content }}</br></br>
-                                            <span class="badge badge-info">Posté le:</span> {{ comments.publishedAt | date("d-m-Y à H:i:s") }}</p>
-                                    {% endfor %}
-                                </div>
-                            </section>
-                            {% else %}
-                                <p>Aucun commentaires</p>
-                            {% endif %}
-
-                            <h5 class="mt-3"> Ajouter un commentaire </h5>
-                            <form action="{{ path('comm_add') }}" method="post">
-                                <textarea name="contenu"></textarea></br>
-                                <input type="hidden" name="article_id" value="{{ article.id }}"></input>
-                                <button class="rounded btn btn-sm btn-warning mb-2" type="submit">Ajouter</button>
-                            </form>
-                        </div>
                     {% endif %}
 
                     {# Aucun régime #}
                     {% if (article.dietFood == "Aucun" or "") %}
-                        <h3 class="text-center h5 py-3 pl-3 rounded bg-danger">{{ article.title }}</h3>
-                        <div class="text-center rounded border border-danger"  id="shadow" style="background-image: url(./media/back.png); 
-                        overflow-y: auto">
-                        <img class="mx-2 mt-2 mb-4 rounded img-fluid" style="width: 340px" 
-                        alt="img" src="./uploads/images/{{ article.image }}"></br>
-                        
-                        {# si le contenu de la table details de la recette en cours n'est pas vide on fait une action #}
-                        {% if article.details is not empty %}
-                            <p class="px-3 h6 rounded border border-danger bg-light col-10 col-md-8 mx-auto" id="textStyle">{{ article.details|nl2br }}</p></br>
-                            {% else %}
-                            {# sinon, ici du vide #}
-                        {% endif %}
-                        
-                        <button type="button" class="btn btn-success mb-3" data-toggle="collapse" data-target="#{{ article.id }}">
-                            <span class="far fa-eye"></span> Voir la recette</button>
-                            <div id="{{ article.id }}" class="collapse rounded border border-danger bg-light col-10 col-md-8 pt-2 mx-auto">
-                                    <p class="px-3 h6" id="textStyle">
-                                        <a data-toggle="tooltip" data-placement="bottom" title="Temps de préparation">
-                                        <span class="fas fa-history"></span></a> {{ article.tempsprepa|nl2br }}mn | 
-                                        <a data-toggle="tooltip" data-placement="bottom" title="Temps de cuisson">
-                                        <span class="fas fa-mug-hot"></span></a> {{ article.tempscuisson|nl2br }}mn
-                                        {% if article.tempsrepos is not empty %}
-                                            | <a data-toggle="tooltip" data-placement="bottom" title="Temps de repos">
-                                            <span class="fas fa-bed"></span></a> {{ article.tempsrepos|nl2br }}mn
-                                            {% else %}
-                                            {# Vide #}
-                                        {% endif %}
-                                    </p></br>
-                                    <p class="px-3 h6 border-top border-danger pt-2" id="textStyle">Ingrédients :</br></br> {{ article.ingredients|nl2br }}</p></br>
-                                    <p class="px-3 h6 border-top border-danger pt-2" id="textStyle">Préparation de la recette :</br></br>{{ article.preparation|nl2br }}</p></br>
-                                </div>
 
-                            {# Section des commentaires #}
-                            <h4 class="mt-3"> Commentaires </h4>
-                            {% if article.comments is not empty %}
-                            <section class="my-2">
-                                <button type="button" class="btn btn-success mb-3" data-toggle="collapse" data-target="#comments-{{ article.id }}">
-                                <span class="far fa-comments"></span> Voir les commentaires</button>
-                                <div class="collapse text-left" id="comments-{{ article.id }}">
-                                    {% for comments in article.comments %}
-                                            <p class="rounded border border-danger bg-light col-10 col-md-8 mx-auto py-2">
-                                            <span class="badge badge-info">{{ comments.author.username }}:</span> {{ comments.content }}</br></br>
-                                            <span class="badge badge-info">Posté le:</span> {{ comments.publishedAt | date("d-m-Y à H:i:s") }}</p>
-                                    {% endfor %}
-                                </div>
-                            </section>
-                            {% else %}
-                                <p>Aucun commentaires</p>
-                            {% endif %}
+                        {% include 'article/nodiet.html.twig' %}
 
-                            <h5 class="mt-3"> Ajouter un commentaire </h5>
-                            <form action="{{ path('comm_add') }}" method="post">
-                                <textarea name="contenu"></textarea></br>
-                                <input type="hidden" name="article_id" value="{{ article.id }}"></input>
-                                <button class="rounded btn btn-sm btn-warning mb-2" type="submit">Ajouter</button>
-                            </form>
-                        </div>
                     {% endif %}
                     
+                    {# Boutons de gestion pour l'administrateur #}
                     <div class="mt-5 text-center border-bottom border-success-light">
                         <ul class="list-unstyled">
                             <li class="mt-2 mt-3">
@@ -422,11 +97,13 @@
             {% endif %}
         {% endfor %}
     </div>
+
 {% endblock %}
 
 {% block script %}
 
 <script>
+    //script pour l'infobulle pour les icones "temps"
   $(function () {
     $('a').tooltip()
   })

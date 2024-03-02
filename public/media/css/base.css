@@ -91,3 +91,11 @@
 #shadow {
     box-shadow: 5px 5px 5px rgb(133, 133, 133);
 }
+
+.back-to-top {
+    position: fixed;
+    display: none;
+    right: 45px;
+    bottom: 45px;
+    z-index: 99;
+}

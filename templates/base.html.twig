@@ -111,6 +111,11 @@
     <div class="container-fluid">
     {% block content %}{% endblock %}
     </div>
+
+    <!-- Boutton retour en haut -->
+    <a href="#" class="btn btn-lg btn-success btn-lg-square back-to-top">
+        <i class="fa fa-angle-double-up"></i>
+    </a>
     
     {% block scripts %}
     {# jQuery en premier, puis Popper.js et Bootstrap JS #}
@@ -129,6 +134,9 @@
 
     {# Script pour linker la page d'acceuil au titre et logo du site #}
     <script src="/media/js/home.js"></script>
+
+    {# Script du bouton retour en haut #}
+    <script src="/media/js/backtotop.js"></script>
 
     {% endblock %}
 </body>

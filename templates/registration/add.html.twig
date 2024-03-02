@@ -1,26 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajout d'un utilisateur{% endblock %}
+{% block title %}Ajout utilisateur{% endblock %}
 
 {% block content %}
+
     <div class="container">
         <h1 class="border-bottom text-center my-5 pb-2" id="titreUsers">Ajout d'un utilisateur</h1>
-        {{ form_start(registrationForm, {'attr': {'class': 'col rounded border border-dark bg-light', 'id': 'shadow'}}) }}
-            <div class="input-field col text-center mt-5">
-                {{ form_widget(registrationForm.username, {'attr': {'placeholder': 'Nom d\'utilisateur'}}) }}
+        {{ form_start(registrationForm, {'attr': {'class': 'col-md-6 rounded border border-dark bg-light mx-auto', 'id': 'shadow'}}) }}
+
+            <div class="input-field col-md-10 mx-auto mt-5">
+                {{ form_widget(registrationForm.username, {'attr': {'placeholder': 'Nom d\'utilisateur', 'class': 'form-control'}}) }}
                 <span class="error">{{ form_errors(registrationForm.username) }}</span>
             </div>
-            <div class="input-field col text-center mt-2">
-                {{ form_widget(registrationForm.plainPassword, {'attr': {'placeholder': 'Mot de passe'}}) }}
+
+            <div class="input-field col-md-10 mx-auto mt-3">
+                {{ form_widget(registrationForm.plainPassword, {'attr': {'placeholder': 'Mot de passe', 'class': 'form-control'}}) }}
                 <span class="error">{{ form_errors(registrationForm.plainPassword) }}</span>
             </div>
-            <div class="input-field col text-center mt-2">
-                {{ form_widget(registrationForm.diet) }}
+
+            <div class="input-field col-md-10 mx-auto mt-3">
+                {{ form_widget(registrationForm.diet, {'attr': {'class': 'form-control'}}) }}
                 <span class="error">{{ form_errors(registrationForm.diet) }}</span>
             </div>
-            <div class="input-field col s12 text-center my-5">
+
+            <div class="input-field col-md-10 mx-auto text-center my-5">
                 <input type="submit" name="" class="btn btn-warning" value="Créer utilisateur">
             </div>
         {{ form_end(registrationForm) }}
     </div>
+
 {% endblock %}
