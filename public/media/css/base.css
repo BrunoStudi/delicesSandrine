@@ -71,6 +71,7 @@
 #btn-envoi {
     background-color: #9E2B40;
     font-family: "Nature";
+    color: white;
 }
 #btn-envoi:hover {
     color: black;
@@ -80,6 +81,7 @@
 #btn-retour {
     background-color: #9E2B40;
     font-family: "Nature";
+    color: white;
 }
 #btn-retour:hover {
     color: black;
@@ -94,8 +96,12 @@
 
 .back-to-top {
     position: fixed;
-    display: none;
+    /*display: none;*/
     right: 45px;
     bottom: 45px;
     z-index: 99;
+}
+
+#footer {
+    background-color: #9E2B40;
 }

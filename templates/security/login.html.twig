@@ -20,7 +20,7 @@
         <div class="input-field col-md-10 mx-auto mt-5">
             <label for="inputUsername" class="col-form-label"></label>
             <div>
-                <p class="text-right">Vous n'êtes pas encore client: <a href="register">Cliquez ici</a></p>
+                <p class="text-right">Vous n'êtes pas encore client: <a style="font-weight: bold" href="register">Cliquez ici</a></p>
                 <input type="text" value="{{ last_username }}" name="username" id="inputUsername" 
                 class="form-control" placeholder="Nom d'utilisateur">
             </div>
@@ -30,7 +30,7 @@
             <div>
                 <input type="password" name="password" id="inputPassword" class="form-control" 
                 autocomplete="current-password" placeholder="Votre mot de passe" required>
-                <p class="text-right mt-2"><a href="#">Mot de passe oublié ?</a></p>
+                <p class="text-right mt-2"><a style="font-weight: bold" href="#">Mot de passe oublié ?</a></p>
             </div>
         </div>
         <div class="col-md-10 mx-auto mt-2">
@@ -55,3 +55,5 @@
     #}
 </form>
 {% endblock %}
+
+{% block footer %}{% endblock %}

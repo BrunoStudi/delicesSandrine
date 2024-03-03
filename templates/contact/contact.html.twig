@@ -6,16 +6,18 @@
 {# Formulaire de contact #}
     <div class="container-fluid">
         <h1 class="text-center py-5 border-bottom border-success" id="accroche">Formulaire de contact</h1>
-        <form class="text-center mt-5" method="post">
-            <input class="rounded mb-2" type="text" placeholder="Entrez votre nom" id="name" autocomplete="off"></br>
-            <input class="rounded mb-2" type="email" placeholder="Entrez votre adresse mail" id="email" autocomplete="off"></br>
-            <input class="rounded mb-5" type="text" placeholder="Sujet du message" id="subject" autocomplete="off"></br>
-            <textarea class="rounded" id="message" placeholder="Rédigez votre message ici" cols="50" rows="10"></textarea></br>
+        <form class="text-center my-5" method="post">
+            <input class="col-md-4 rounded mb-3" type="text" placeholder="Entrez votre nom" id="name" autocomplete="off"></br>
+            <input class="col-md-4 rounded mb-3" type="email" placeholder="Entrez votre adresse mail" id="email" autocomplete="off"></br>
+            <input class="col-md-4 rounded mb-5" type="text" placeholder="Sujet du message" id="subject" autocomplete="off"></br>
+            <textarea class="col-md-4 rounded" id="message" placeholder="Rédigez votre message ici" cols="50" rows="10"></textarea></br>
             <button  type="submit" class="rounded mt-3 mr-2 btn btn-md" style="font-size: 20px" id="btn-envoi">Envoyer</button>
             <input type="button" class="rounded mt-3 ml-2 btn btn-md" style="font-size: 20px" value="Retour" id="btn-retour"> 
         </form>
     </div>
 {% endblock %}
+
+{% block footer %}{% endblock %}
 
 {% block scripts %}
 

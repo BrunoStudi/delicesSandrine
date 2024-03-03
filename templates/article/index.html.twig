@@ -79,7 +79,7 @@
                     {% endif %}
                     
                     {# Boutons de gestion pour l'administrateur #}
-                    <div class="mt-5 text-center border-bottom border-success-light">
+                    <div class="mt-5 text-center">
                         <ul class="list-unstyled">
                             <li class="mt-2 mt-3">
                                 {% if is_granted('ROLE_ADMIN')%}
@@ -88,10 +88,13 @@
                                     <a href="{{ path('article_remove', {'id': article.id}) }}" role="button" class="btn btn-danger">
                                     <span class="fas fa-trash-alt">&nbsp&nbsp</span>Supprimer</a>
                                 {% endif %}
-                                <li class="mt-4">Auteur: {{ article.author.username }}</li>
-                                <li class="mt-2">Publié le: {{ article.publishedAt | date("d-m-Y à H:i:s") }}</li>
                             </li>
                         </ul>
+                    </div>
+                    <div class="text-center border-bottom border-success-light">
+                        <p class="mt-4">Par <span class="text-secondary" style="font-weight: bold">{{ article.author.username }}</span>
+                        le <span class="text-secondary" style="font-weight: bold">{{ article.publishedAt | date("d-m-Y") }}</span>
+                        à <span class="text-secondary" style="font-weight: bold">{{ article.publishedAt | date("H-i-s") }}</span></p>
                     </div>
                 </div>
             {% endif %}

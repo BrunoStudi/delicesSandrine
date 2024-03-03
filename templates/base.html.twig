@@ -112,13 +112,67 @@
     {% block content %}{% endblock %}
     </div>
 
-    <!-- Boutton retour en haut -->
-    <a href="#" class="btn btn-lg btn-success btn-lg-square back-to-top">
-        <i class="fa fa-angle-double-up"></i>
-    </a>
+</body>
+
+{% block footer %}
+			<!-- Footer Start -->
+			<div class="container-fluid text-light mt-5" id="footer">
+				<div class="container py-3">
+					<div class="row">
+						<div class="col-lg-3 col-md-6">
+							<h4 class="text-light mb-4">Adresse</h4>
+							<p class="mb-2">
+								<i class="fa fa-map-marker-alt me-3"></i>&nbsp&nbspAix-Les-Bains</p>
+							<p class="mb-2">
+								<i class="fa fa-phone me-3"></i> +33 4 79 38 13 85</p>
+							<p class="mb-2">
+								<i class="fa fa-envelope me-3"></i> SandrineCoupart@gmail.com</p>
+							<div class="d-flex pt-2">
+								<a class="mr-2 btn btn-outline-light btn-social" href="#">
+									<i class="fab fa-facebook-f"></i>
+								</a>
+								<a class="mr-2 btn btn-outline-light btn-social" href="#">
+									<i class="fab fa-instagram"></i>
+								</a>
+								<a class="btn btn-outline-light btn-social" href="#">
+									<i class="fab fa-linkedin-in"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="copyright">
+					<div class="row">
+						<div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+							&copy;
+							<a class="border-bottom" href="#">SandrineCoupart</a>, tous les droits sont réservés.
+						</div>
+						<div class="col-md-6 text-center text-md-end">
+							<div class="footer-menu">
+								<a href="#">Cookies</a> <span class="text-secondary"> |</span>
+								<a href="#">Help</a> <span class="text-secondary"> |</span>
+								<a href="#">FAQs</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+	<!-- Footer End -->
+{% endblock %}
+
+<!-- Boutton retour en haut -->
+<a href="#" class="back-to-top btn btn-lg btn-success btn-lg-square">
+    <i class="fa fa-angle-double-up"></i>
+</a>
     
-    {% block scripts %}
+{% block scripts %}
+
     {# jQuery en premier, puis Popper.js et Bootstrap JS #}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 
     crossorigin="anonymous"></script>
@@ -128,6 +182,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
     crossorigin="anonymous"></script>
+    
 
     {# Script pour appeler la page contact depuis la page d'acceuil #}
     <script src="/media/js/contact.js"></script>
@@ -137,7 +192,8 @@
 
     {# Script du bouton retour en haut #}
     <script src="/media/js/backtotop.js"></script>
-
-    {% endblock %}
-</body>
+    <script src="/media/js/easing.min.js"></script>
+    
+{% endblock %}
+    
 </html>

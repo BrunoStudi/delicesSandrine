@@ -31,7 +31,10 @@ class CommentController extends AbstractController
         $comments->setContent($contenu); // Associer le contenu récupéré au dessus dans la variable comments.
         $comments->setArticle($article); // Associer comments à l'article correspondant via son ID.
 
-        $this->saveComment($doctrine, $comments);
+        if(!$contenu == '')
+        {
+            $this->saveComment($doctrine, $comments);
+        }
 
         return $this->redirectToRoute('article_show', ['id' => $article->getId()]);
     }

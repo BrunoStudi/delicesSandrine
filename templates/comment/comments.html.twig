@@ -6,8 +6,11 @@
         <div class="collapse text-left" id="comments-{{ article.id }}">
             {% for comments in article.comments %}
                 <p class="rounded border border-dark bg-light col-10 col-md-8 mx-auto py-2">
-                    <span class="badge badge-info">{{ comments.author.username }}:</span> {{ comments.content }}</br></br>
-                    <span class="badge badge-info">Posté le:</span> {{ comments.publishedAt | date("d-m-Y à H:i:s") }}
+                    Ajouté par 
+                    <span class="badge badge-info">{{ comments.author.username }}</span>
+                    le <span class="text-secondary" style="font-weight: bold">{{ comments.publishedAt | date("d-m-Y") }}</span> 
+                    à <span class="text-secondary" style="font-weight: bold">{{ comments.publishedAt | date("H:i:s") }}</span></br></br>
+                    <span class="fas fa-angle-right"></span> {{ comments.content }}
                 </p>
             {% endfor %}
         </div>
@@ -18,7 +21,8 @@
 
 <h5 class="mt-3"> Ajouter un commentaire </h5>
 <form action="{{ path('comm_add') }}" method="post">
-    <textarea name="contenu"></textarea></br>
+    <textarea class="col-md-5 col-8" name="contenu"></textarea></br>
     <input type="hidden" name="article_id" value="{{ article.id }}"></input>
-    <button class="rounded btn btn-sm btn-warning mb-2" type="submit">Ajouter</button>
+    <button class="rounded btn btn-sm btn-warning mb-3 text-uppercase" type="submit">Ajouter mon commentaire 
+    <i class="fas fa-paper-plane"></i></button>
 </form>
